@@ -13,16 +13,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myJumpHeight;
 
-    /*[SerializeField]
+    [SerializeField]
     float myDashSpeed;
 
     [SerializeField]
-    float dashTimer;*/
+    float dashTimer;
     
     [SerializeField]
     GameObject myCamera;
 
-    //float dashTimerMax = 3.0f;
+    float dashTimerMax = 3.0f;
 
     bool myJump = false;
     
@@ -51,44 +51,44 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
 
-            /*if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
+            if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
             {
                 Player.velocity = Vector3.forward * myDashSpeed;
                 dashTimer = 0;
-            }*/
+            }
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             transform.Translate(Vector3.back * mySpeed * Time.deltaTime);
 
-            /*if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
+            if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
             {
                 Player.velocity = Vector3.back * myDashSpeed;
                 dashTimer = 0;
-            }*/
+            }
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * mySpeed * Time.deltaTime);
 
-            /*if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
+            if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
             {
                 Player.velocity = Vector3.left * myDashSpeed;
                 dashTimer = 0;
-            }*/
+            }
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(Vector3.right * mySpeed * Time.deltaTime);
 
-            /*if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
+            if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
             {
                 Player.velocity = Vector3.right * myDashSpeed;
                 dashTimer = 0;
-            }*/
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && myJump == false)
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
             myJump = true;
         }
 
-        /*if (dashTimer <= dashTimerMax)
+        if (dashTimer <= dashTimerMax)
         {
             dashTimer += Time.deltaTime;
         }
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
             {
                 dashTimer = dashTimerMax;
             }
-        }*/
+        }
     }
 
     private void OnCollisionEnter(Collision player)
