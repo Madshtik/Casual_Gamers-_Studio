@@ -14,15 +14,16 @@ public class PlayerController : MonoBehaviour
     float myJumpHeight;
 
     [SerializeField]
-    float myDashSpeed;
+    float myTeleportDistance;
 
     [SerializeField]
-    float dashTimer;
+    float myTeleportTimer;
     
     [SerializeField]
-    GameObject myCamera;
+    float myTeleportTimerMax;
 
-    float dashTimerMax = 3.0f;
+    [SerializeField]
+    GameObject myCamera;
 
     bool myJump = false;
     
@@ -36,13 +37,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Plane levelPlane = new Plane(Vector3.up, transform.position);
-        Ray myRay = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        float rayHitPoint = 0.0f;
+        float rayHitDist = 0.0f;
 
-        if (levelPlane.Raycast(myRay, out rayHitPoint))
+        if (levelPlane.Raycast(myRay, out rayHitDist))
         {
-            Vector3 target = myRay.GetPoint(rayHitPoint);
+            Vector3 target = myRay.GetPoint(rayHitDist);
             Quaternion playerRotate = Quaternion.LookRotation(target - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, playerRotate, mySpeed * Time.deltaTime);
         }
@@ -51,10 +52,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
+            if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
-                Player.velocity = Vector3.forward * myDashSpeed;
-                dashTimer = 0;
+                transform.Translate(Vector3.forward * myTeleportDistance * mySpeed * Time.deltaTime);
+                myTeleportTimer = 0;
             }
         }
 
@@ -62,10 +63,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector3.back * mySpeed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
+            if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
-                Player.velocity = Vector3.back * myDashSpeed;
-                dashTimer = 0;
+                transform.Translate(Vector3.back * myTeleportDistance * mySpeed * Time.deltaTime);
+                myTeleportTimer = 0;
             }
         }
 
@@ -73,10 +74,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector3.left * mySpeed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
+            if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
-                Player.velocity = Vector3.left * myDashSpeed;
-                dashTimer = 0;
+                transform.Translate(Vector3.left * myTeleportDistance * mySpeed * Time.deltaTime);
+                myTeleportTimer = 0;
             }
         }
 
@@ -84,10 +85,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector3.right * mySpeed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.LeftControl) && dashTimer >= dashTimerMax)
+            if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
-                Player.velocity = Vector3.right * myDashSpeed;
-                dashTimer = 0;
+                transform.Translate(Vector3.right * myTeleportDistance * mySpeed * Time.deltaTime);
+                myTeleportTimer = 0;
             }
         }
 
@@ -97,15 +98,15 @@ public class PlayerController : MonoBehaviour
             myJump = true;
         }
 
-        if (dashTimer <= dashTimerMax)
+        if (myTeleportTimer <= myTeleportTimerMax)
         {
-            dashTimer += Time.deltaTime;
+            myTeleportTimer += Time.deltaTime;
         }
         else
         {
-            if (dashTimer == dashTimerMax)
+            if (myTeleportTimer == myTeleportTimerMax)
             {
-                dashTimer = dashTimerMax;
+                myTeleportTimer = myTeleportTimerMax;
             }
         }
     }

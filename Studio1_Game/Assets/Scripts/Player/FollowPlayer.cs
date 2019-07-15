@@ -9,7 +9,7 @@ public class FollowPlayer : MonoBehaviour
 
     Vector3 camOffset;
 
-    float slerpMultiplier = 1.0f;
+    float slerpMultiplier = 0.025f;
     // Start is called before the first frame update
     void Start()
     {
