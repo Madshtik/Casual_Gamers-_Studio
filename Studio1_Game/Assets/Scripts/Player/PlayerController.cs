@@ -22,11 +22,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myTeleportTimerMax;
 
+    bool myJump = false;
+
     [SerializeField]
     GameObject myCamera;
 
-    bool myJump = false;
-    
     // Start is called before the first frame update
     void Start()
     {
