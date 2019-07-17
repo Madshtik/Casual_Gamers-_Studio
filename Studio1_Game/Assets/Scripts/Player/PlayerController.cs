@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject myCamera;
 
+    [SerializeField]
+    Animator myAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,6 +111,15 @@ public class PlayerController : MonoBehaviour
             {
                 myTeleportTimer = myTeleportTimerMax;
             }
+        }
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            myAnimator.SetBool("IsAttacking", true);
+        }
+        else
+        {
+            myAnimator.SetBool("IsAttacking", false);
         }
     }
 
