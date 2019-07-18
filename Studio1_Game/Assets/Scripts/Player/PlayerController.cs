@@ -22,13 +22,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myTeleportTimerMax;
 
+    [SerializeField]
+    float attackCooldown;
+
     bool myJump = false;
 
     [SerializeField]
     GameObject myCamera;
 
     [SerializeField]
-    Animator myAnimator;
+    Animator MyAnimator;
+
+    [SerializeField]
+    Animation MyAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -51,15 +57,21 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, playerRotate, mySpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && MyAnimation.IsPlaying("Attack") == false)
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
+            MyAnimator.SetBool("IsWalking", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
                 transform.Translate(Vector3.forward * myTeleportDistance * mySpeed * Time.deltaTime);
                 myTeleportTimer = 0;
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) /*&& !MyAnimation.IsPlaying("Attack")*/)
+        {
+            MyAnimator.SetBool("IsWalking", false);
         }
 
         if (Input.GetKey(KeyCode.S))
@@ -97,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && myJump == false)
         {
-            Player.velocity = new Vector3(0, myJumpHeight, 0);
+            Player.velocity = new Vector3(0f, myJumpHeight, 0f);
             myJump = true;
         }
 
@@ -113,14 +125,17 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && MyAnimator.GetBool("IsWalking") != true)
         {
-            myAnimator.SetBool("IsAttacking", true);
+            MyAnimator.SetTrigger("IsAttacking");
+            /*attackCooldown = attackCooldown - 1 * Time.deltaTime;
+
+            if (attackCooldown <= 0f)
+            {
+                attackCooldown = 0f;
+            }*/
         }
-        else
-        {
-            myAnimator.SetBool("IsAttacking", false);
-        }
+    
     }
 
     private void OnCollisionEnter(Collision player)

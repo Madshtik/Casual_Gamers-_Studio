@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteeringBehavior : MonoBehaviour
+public class WanderBehaviour : GhoulNode
 {
     // Start is called before the first frame update
     void Start()
