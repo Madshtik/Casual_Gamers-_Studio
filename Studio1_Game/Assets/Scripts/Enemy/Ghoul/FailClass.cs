@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class FailClass : GhoulNode
 {
-    // Start is called before the first frame update
-    void Start()
+    public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        
-    }
+        for (int i = 0; i < MyChildren.Count; i++)
+        {
+            State childState = MyChildren[i].UpdateState(GBT);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            if (childState == State.SUCCESS)
+            {
+                return State.FAILED;
+            }
+
+            if (childState == State.RUNNING)
+            {
+                return State.RUNNING;
+            }
+        }
+        return State.FAILED;
     }
 }

@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CheckEnraged : GhoulNode
 {
-    // Start is called before the first frame update
-    void Start()
+    public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        
-    }
+        if (GBT.isEnraged == true && GBT.enragedAttack == true)
+        {
+            return State.SUCCESS;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return State.FAILED;
     }
 }

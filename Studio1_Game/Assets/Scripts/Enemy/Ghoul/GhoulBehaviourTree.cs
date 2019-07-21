@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class GhoulBehaviourTree : MonoBehaviour
 {
-    public GhoulNode RootNode;
+    GhoulNode RootNode;
     public GameObject MyEnemy;
+    public Transform TargetPlayer;
+
+    public float myMaxHP;
+    public float myCurrentHP;
+    public float mySpeed;
+    public float checkDistance;
+    public float fleeTimerMax;
+    public float swordDamage;
+
+    public bool isFleeing;
+    public bool isEnraged;
+    public bool normalAttack;
+    public bool enragedAttack;
 
     // Start is called before the first frame update
     void Start()
     {
-
         RootNode = new PrimarySelector();
 
         RootNode.MyChildren.Add(new FleeSequence());
@@ -39,6 +51,15 @@ public class GhoulBehaviourTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkDistance = Vector3.Distance(MyEnemy.transform.position, TargetPlayer.position);
         RootNode.UpdateState(this);
+    }
+
+    public void OnTriggerEnter(Collider MyTrigger)
+    {
+        if (MyTrigger.gameObject.tag.Equals("Sword"))
+        {
+            myCurrentHP -= swordDamage * (2 * Time.deltaTime);
+        }
     }
 }

@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class CheckHP : GhoulNode
 {
-    // Start is called before the first frame update
-    void Start()
+    public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        
-    }
+        if (GBT.myCurrentHP <= 20f && GBT.myCurrentHP >= 11 && GBT.isEnraged == false)
+        {
+            return State.SUCCESS;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (GBT.myCurrentHP <= 10f && GBT.myCurrentHP >= 0 && GBT.isFleeing == false)
+        {
+            return State.SUCCESS; 
+        }
+
+        return State.FAILED;
     }
 }

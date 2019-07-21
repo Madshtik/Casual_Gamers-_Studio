@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PursuitBehaviour : GhoulNode
 {
-    // Start is called before the first frame update
-    void Start()
+    public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (GBT.checkDistance <= 1f)
+        {
+            return State.SUCCESS;
+        }
+        return State.FAILED;
     }
 }

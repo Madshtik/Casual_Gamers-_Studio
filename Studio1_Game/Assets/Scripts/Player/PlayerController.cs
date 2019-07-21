@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    Rigidbody Player;
+    public Rigidbody Player;
 
     [SerializeField]
     float mySpeed;
@@ -22,13 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myTeleportTimerMax;
 
-    [SerializeField]
-    float attackCooldown;
-
-    bool myJump = false;
-
-    [SerializeField]
-    GameObject myCamera;
+    bool isJumping = false;
 
     [SerializeField]
     Animator MyAnimator;
@@ -69,7 +62,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.W) /*&& !MyAnimation.IsPlaying("Attack")*/)
+        if (Input.GetKeyUp(KeyCode.W) && !MyAnimation.IsPlaying("Attack"))
         {
             MyAnimator.SetBool("IsWalking", false);
         }
@@ -107,10 +100,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && myJump == false)
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
         {
             Player.velocity = new Vector3(0f, myJumpHeight, 0f);
-            myJump = true;
+            isJumping = true;
         }
 
         if (myTeleportTimer <= myTeleportTimerMax)
@@ -125,15 +118,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Mouse0) && MyAnimator.GetBool("IsWalking") != true)
+        if (Input.GetMouseButtonDown(0) && MyAnimator.GetBool("IsWalking") != true)
         {
             MyAnimator.SetTrigger("IsAttacking");
-            /*attackCooldown = attackCooldown - 1 * Time.deltaTime;
-
-            if (attackCooldown <= 0f)
-            {
-                attackCooldown = 0f;
-            }*/
         }
     
     }
@@ -142,7 +129,7 @@ public class PlayerController : MonoBehaviour
     {
         if (player.gameObject.tag == "Floor")
         {
-            myJump = false;
+            isJumping = false;
         }
     }
 }

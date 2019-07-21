@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class EnragedClass : GhoulNode
 {
-    // Start is called before the first frame update
-    void Start()
+    public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GBT.isEnraged = true;
+        return State.SUCCESS;
     }
 }
