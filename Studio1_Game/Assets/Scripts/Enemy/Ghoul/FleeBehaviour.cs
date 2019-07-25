@@ -8,16 +8,24 @@ public class FleeBehaviour : GhoulNode
     {
         if (GBT.checkDistance <= 10f && GBT.fleeTimerMax >= 0f)
         {
-            GBT.MyEnemy.transform.position += GBT.TargetPlayer.position * GBT.mySpeed * Time.deltaTime; //script will be changed after learningevade behaviour found under pursuit
-            GBT.fleeTimerMax -= 1f * Time.deltaTime; //1f is to normalize the timer to decrease by 1 second
+            Vector3 vectVelocity = Vector3.Normalize(GBT.transform.position - GBT.TargetPlayer.position) * GBT.mySpeed;
+            Vector3 mySteering = vectVelocity - GBT.myRB.velocity;
+
+            Vector3.ClampMagnitude(mySteering, GBT.maxForce);
+
+            GBT.myRB.AddForce(mySteering);
+
+            GBT.fleeTimerMax -= 1f * Time.deltaTime;
         }
 
-        if (GBT.fleeTimerMax <= 0f)
+        if (GBT.fleeTimerMax <= 1f)
         {
+            GBT.mySpeed = 0f;
             return State.FAILED;
         }
   
         GBT.isFleeing = true;
+        GBT.isEnraged = false;
         return State.SUCCESS;
     }
 }

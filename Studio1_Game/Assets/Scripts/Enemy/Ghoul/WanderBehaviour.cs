@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class WanderBehaviour : GhoulNode
 {
-    // Start is called before the first frame update
-    void Start()
+    public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return State.SUCCESS;
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class GhoulBehaviourTree : MonoBehaviour
 {
     GhoulNode RootNode;
-    public GameObject MyEnemy;
     public Transform TargetPlayer;
+    public Rigidbody myRB;
 
     public float myMaxHP;
     public float myCurrentHP;
@@ -14,15 +14,18 @@ public class GhoulBehaviourTree : MonoBehaviour
     public float checkDistance;
     public float fleeTimerMax;
     public float swordDamage;
-
+    public float myDamage;
+    public float maxForce;
     public bool isFleeing;
     public bool isEnraged;
     public bool normalAttack;
     public bool enragedAttack;
+    public bool mouseClickBool;
 
     // Start is called before the first frame update
     void Start()
     {
+        myRB = GetComponent<Rigidbody>();
         RootNode = new PrimarySelector();
 
         RootNode.MyChildren.Add(new FleeSequence());
@@ -51,15 +54,25 @@ public class GhoulBehaviourTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkDistance = Vector3.Distance(MyEnemy.transform.position, TargetPlayer.position);
+        checkDistance = Vector3.Distance(transform.position, TargetPlayer.position);
+        if (Input.GetMouseButtonDown(0))
+        {
+            mouseClickBool = true;
+        }
         RootNode.UpdateState(this);
     }
 
-    public void OnTriggerEnter(Collider MyTrigger)
+    private void OnTriggerEnter(Collider MyTrigger)
     {
-        if (MyTrigger.gameObject.tag.Equals("Sword"))
+        if (MyTrigger.gameObject.tag.Equals("Sword") && mouseClickBool == true)
         {
             myCurrentHP -= swordDamage * (2 * Time.deltaTime);
+            mouseClickBool = false;
+
+            if (myCurrentHP <= 0f)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

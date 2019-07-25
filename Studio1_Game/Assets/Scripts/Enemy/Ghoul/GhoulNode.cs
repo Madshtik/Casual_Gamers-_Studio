@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhoulNode : MonoBehaviour
+public class GhoulNode
 {
     public List<GhoulNode> MyChildren = new List<GhoulNode>();
 

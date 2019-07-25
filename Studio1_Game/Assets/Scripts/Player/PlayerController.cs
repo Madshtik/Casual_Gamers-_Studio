@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myTeleportTimerMax;
 
+    float attackCounter;
+
     bool isJumping = false;
 
     [SerializeField]
@@ -118,16 +120,24 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && MyAnimator.GetBool("IsWalking") != true)
+        if (Input.GetMouseButtonDown(0) && MyAnimator.GetBool("IsWalking") != true && attackCounter == 0f)
         {
+            attackCounter = 1f;
+            Debug.Log(attackCounter);
             MyAnimator.SetTrigger("IsAttacking");
+
+            if (Input.GetMouseButtonDown(0) && MyAnimator.GetBool("IsWalking") != true && attackCounter == 1f)
+            {
+                attackCounter = 0f;
+                MyAnimator.SetTrigger("IsAttackingAgain");
+            }
         }
     
     }
 
-    private void OnCollisionEnter(Collision player)
+    private void OnCollisionEnter(Collision Player)
     {
-        if (player.gameObject.tag == "Floor")
+        if (Player.gameObject.tag == "Floor")
         {
             isJumping = false;
         }

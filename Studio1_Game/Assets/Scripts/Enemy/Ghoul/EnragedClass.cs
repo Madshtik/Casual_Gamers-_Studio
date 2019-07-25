@@ -6,7 +6,14 @@ public class EnragedClass : GhoulNode
 {
     public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        GBT.isEnraged = true;
-        return State.SUCCESS;
+        if (GBT.myCurrentHP <= 5f)
+        {
+            GBT.isEnraged = true;
+            GBT.isFleeing = false;
+            GBT.normalAttack = false;
+            return State.SUCCESS;
+        }
+
+        return State.FAILED;
     }
 }

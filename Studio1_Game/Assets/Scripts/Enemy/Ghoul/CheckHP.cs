@@ -6,12 +6,12 @@ public class CheckHP : GhoulNode
 {
     public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        if (GBT.myCurrentHP <= 20f && GBT.myCurrentHP >= 11 && GBT.isEnraged == false)
+        if (GBT.myCurrentHP <= 10f && GBT.myCurrentHP >= 5f && GBT.isEnraged == false)
         {
             return State.SUCCESS;
         }
 
-        if (GBT.myCurrentHP <= 10f && GBT.myCurrentHP >= 0 && GBT.isFleeing == false)
+        if (GBT.myCurrentHP <= 5f && GBT.isFleeing == false)
         {
             return State.SUCCESS; 
         }

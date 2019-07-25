@@ -12,10 +12,20 @@ public class CheckRange : GhoulNode
             return State.SUCCESS;
         }
 
-        if (GBT.checkDistance <= 20f && GBT.isEnraged == true)
+        if (GBT.checkDistance >= 10f && GBT.normalAttack == true)
+        {
+            GBT.normalAttack = false;
+        }
+
+        if (GBT.checkDistance <= 20f && GBT.isEnraged == true && GBT.normalAttack != true && GBT.myCurrentHP <= 5f)
         {
             GBT.enragedAttack = true;
             return State.SUCCESS;
+        }
+
+        if (GBT.checkDistance >= 20f && GBT.enragedAttack == true)
+        {
+            GBT.enragedAttack = false;
         }
 
         return State.FAILED;

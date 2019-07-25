@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 6245521081558262318}
-  mySpeed: 5
+  mySpeed: 7.5
   myJumpHeight: 7.5
   myTeleportDistance: 50
   myTeleportTimer: 3
@@ -1190,7 +1190,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3562001675894909000}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10.027739, y: 5.453208, z: 51.630146}

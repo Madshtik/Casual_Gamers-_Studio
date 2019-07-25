@@ -20,7 +20,6 @@ public class PrimarySelector : GhoulNode
                 return State.RUNNING;
             }
         }
-
         return State.FAILED;
     }
 }

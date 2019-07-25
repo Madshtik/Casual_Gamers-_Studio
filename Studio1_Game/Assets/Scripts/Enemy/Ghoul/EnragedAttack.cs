@@ -6,10 +6,6 @@ public class EnragedAttack : GhoulNode
 {
     public override State UpdateState(GhoulBehaviourTree GBT)
     {
-        if (GBT.checkDistance <= 1f)
-        {
-            return State.SUCCESS;
-        }
-        return State.FAILED;
+        return State.SUCCESS;
     }
 }
