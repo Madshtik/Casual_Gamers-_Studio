@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    Rigidbody Player;
+    public Rigidbody Player;
 
     [SerializeField]
     float mySpeed;
@@ -22,10 +21,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myTeleportTimerMax;
 
-    bool myJump = false;
+    float attackCounter;
+
+    bool isJumping = false;
 
     [SerializeField]
-    GameObject myCamera;
+    Animator MyAnimator;
+
+    [SerializeField]
+    Animation MyAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -48,15 +52,21 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, playerRotate, mySpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && MyAnimation.IsPlaying("Attack") == false)
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
+            MyAnimator.SetBool("IsWalking", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
                 transform.Translate(Vector3.forward * myTeleportDistance * mySpeed * Time.deltaTime);
                 myTeleportTimer = 0;
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) && !MyAnimation.IsPlaying("Attack"))
+        {
+            MyAnimator.SetBool("IsWalking", false);
         }
 
         if (Input.GetKey(KeyCode.S))
@@ -92,10 +102,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && myJump == false)
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
         {
-            Player.velocity = new Vector3(0, myJumpHeight, 0);
-            myJump = true;
+            Player.velocity = new Vector3(0f, myJumpHeight, 0f);
+            isJumping = true;
         }
 
         if (myTeleportTimer <= myTeleportTimerMax)
@@ -109,13 +119,27 @@ public class PlayerController : MonoBehaviour
                 myTeleportTimer = myTeleportTimerMax;
             }
         }
+
+        if (Input.GetMouseButtonDown(0) && MyAnimator.GetBool("IsWalking") != true && attackCounter == 0f)
+        {
+            attackCounter = 1f;
+            Debug.Log(attackCounter);
+            MyAnimator.SetTrigger("IsAttacking");
+
+            if (Input.GetMouseButtonDown(0) && MyAnimator.GetBool("IsWalking") != true && attackCounter == 1f)
+            {
+                attackCounter = 0f;
+                MyAnimator.SetTrigger("IsAttackingAgain");
+            }
+        }
+    
     }
 
-    private void OnCollisionEnter(Collision player)
+    private void OnCollisionEnter(Collision Player)
     {
-        if (player.gameObject.tag == "Floor")
+        if (Player.gameObject.tag == "Floor")
         {
-            myJump = false;
+            isJumping = false;
         }
     }
 }
