@@ -125,7 +125,7 @@ MonoBehaviour:
   myRB: {fileID: 6239648222214428471}
   myMaxHP: 20
   myCurrentHP: 20
-  mySpeed: 5
+  mySpeed: 2.5
   checkDistance: 0
   fleeTimerMax: 5
   swordDamage: 12.5

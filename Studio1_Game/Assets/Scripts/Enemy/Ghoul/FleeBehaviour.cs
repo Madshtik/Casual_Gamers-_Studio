@@ -18,7 +18,7 @@ public class FleeBehaviour : GhoulNode
             GBT.fleeTimerMax -= 1f * Time.deltaTime;
         }
 
-        if (GBT.fleeTimerMax <= 1f)
+        if (GBT.fleeTimerMax <= 1f && GBT.isEnraged != true)
         {
             GBT.mySpeed = 0f;
             return State.FAILED;
