@@ -9,6 +9,7 @@ public class PursuitBehaviour : GhoulNode
         if (GBT.checkDistance <= 10f && GBT.myCurrentHP >= 10)
         {   
             Vector3 vectVelocity = Vector3.Normalize(GBT.TargetPlayer.position - GBT.transform.position) * GBT.mySpeed;
+            vectVelocity = new Vector3(vectVelocity.x, 0, vectVelocity.z);
 
             /*float T = 2f;
             Vector3 FuturePos = GBT.TargetPlayer.position + vectVelocity;*/
