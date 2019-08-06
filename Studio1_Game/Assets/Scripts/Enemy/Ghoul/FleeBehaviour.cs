@@ -9,6 +9,7 @@ public class FleeBehaviour : GhoulNode
         if (GBT.checkDistance <= 10f && GBT.fleeTimerMax >= 0f)
         {
             Vector3 vectVelocity = Vector3.Normalize(GBT.transform.position - GBT.TargetPlayer.position) * GBT.mySpeed;
+            vectVelocity = new Vector3(vectVelocity.x, 0, vectVelocity.z);
             Vector3 mySteering = vectVelocity - GBT.myRB.velocity;
 
             Vector3.ClampMagnitude(mySteering, GBT.maxForce);
