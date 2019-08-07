@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CheckRange : GhoulNode
 {
-    public override State UpdateState(GhoulBehaviourTree GBT)
+    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         if (GBT.checkDistance <= 10f && GBT.isEnraged != true)
         {
             GBT.normalAttack = true;
-            return State.SUCCESS;
+            myCurrentState = State.SUCCESS;
         }
 
         if (GBT.checkDistance >= 10f && GBT.normalAttack == true)
@@ -20,7 +20,7 @@ public class CheckRange : GhoulNode
         if (GBT.checkDistance <= 20f && GBT.isEnraged == true && GBT.normalAttack != true && GBT.myCurrentHP <= 5f)
         {
             GBT.enragedAttack = true;
-            return State.SUCCESS;
+            myCurrentState = State.SUCCESS;
         }
 
         if (GBT.checkDistance >= 20f && GBT.enragedAttack == true)
@@ -28,6 +28,6 @@ public class CheckRange : GhoulNode
             GBT.enragedAttack = false;
         }
 
-        return State.FAILED;
+        myCurrentState = State.FAILED;
     }
 }

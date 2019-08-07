@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WanderBehaviour : GhoulNode
 {
-    public override State UpdateState(GhoulBehaviourTree GBT)
+    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
-        return State.SUCCESS;
+        myCurrentState = State.SUCCESS;
     }
 }

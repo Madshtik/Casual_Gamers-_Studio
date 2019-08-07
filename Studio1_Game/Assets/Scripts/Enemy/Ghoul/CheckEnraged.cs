@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CheckEnraged : GhoulNode
 {
-    public override State UpdateState(GhoulBehaviourTree GBT)
+    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         if (GBT.isEnraged == true && GBT.enragedAttack == true)
         {
-            return State.SUCCESS;
+            myCurrentState = State.SUCCESS;
         }
 
-        return State.FAILED;
+        myCurrentState = State.FAILED;
     }
 }

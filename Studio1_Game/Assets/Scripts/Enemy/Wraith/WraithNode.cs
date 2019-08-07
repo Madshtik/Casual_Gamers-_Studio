@@ -2,20 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WraithNode
+public class WraithNode: Node
 {
-    public List<WraithNode> MyChildren = new List<WraithNode>();
-
-    public enum wraithState
+    public override void WraithInitializeState(WraithBehaviourTree WBT)
     {
-        RUNNING,
-        SUCCESS,
-        FAILLED
+        wManager = WBT;
+
+        for (int i = 0; i < MyChildren.Count; i++)
+        {
+            MyChildren[i].WraithInitializeState(wManager);
+        }
     }
-    public wraithState myCurrentState;
 
-    public virtual wraithState UpdateState(WraithBehaviourTree WBT)
+    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
-        return myCurrentState;
+        gManager = GBT;
+
+        for (int i = 0; i < MyChildren.Count; i++)
+        {
+            MyChildren[i].GhoulInitializeState(gManager);
+        }
     }
 }

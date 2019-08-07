@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnragedClass : GhoulNode
 {
-    public override State UpdateState(GhoulBehaviourTree GBT)
+    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         if (GBT.myCurrentHP <= 5f)
         {
             GBT.isEnraged = true;
             GBT.isFleeing = false;
             GBT.normalAttack = false;
-            return State.SUCCESS;
+            myCurrentState = State.SUCCESS;
         }
 
-        return State.FAILED;
+        myCurrentState = State.FAILED;
     }
 }

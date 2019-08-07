@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Attack : GhoulNode
 {
-    public override State UpdateState(GhoulBehaviourTree GBT)
+    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         if (GBT.checkDistance <= 1f)
         {
-            return State.SUCCESS;
+            myCurrentState = State.SUCCESS;
         }
-        return State.FAILED;
+        myCurrentState = State.FAILED;
     }
 }

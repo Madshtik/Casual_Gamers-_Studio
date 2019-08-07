@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PursuitBehaviour : GhoulNode
 {
-    public override State UpdateState(GhoulBehaviourTree GBT)
+    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {      
         if (GBT.checkDistance <= 10f && GBT.myCurrentHP >= 10)
         {   
@@ -20,9 +20,9 @@ public class PursuitBehaviour : GhoulNode
 
             GBT.myRB.AddForce(mySteering);
 
-            return State.SUCCESS;
+            myCurrentState = State.SUCCESS;
         }
 
-        return State.FAILED;
+        myCurrentState = State.FAILED;
     }
 }
