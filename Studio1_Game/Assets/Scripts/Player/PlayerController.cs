@@ -17,19 +17,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     float myTeleportTimer;
-    
+
     [SerializeField]
     float myTeleportTimerMax;
 
-    float attackCounter;
+    //float attackTimer;
+
+    bool attackedOnce = false;
 
     bool isJumping = false;
 
     [SerializeField]
     Animator MyAnimator;
-
-    [SerializeField]
-    Animation MyAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +51,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, playerRotate, mySpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.W) && MyAnimation.IsPlaying("Attack") == false)
+        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S))
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
             MyAnimator.SetBool("IsWalking", true);
@@ -64,7 +63,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.W) && !MyAnimation.IsPlaying("Attack"))
+        if (Input.GetKeyUp(KeyCode.W))
         {
             MyAnimator.SetBool("IsWalking", false);
         }
@@ -80,7 +79,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.left * mySpeed * Time.deltaTime);
 
@@ -91,7 +90,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.right * mySpeed * Time.deltaTime);
 
@@ -120,19 +119,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && MyAnimator.GetBool("IsWalking") != true && attackCounter == 0f)
+        if (Input.GetMouseButtonDown(0))
         {
-            attackCounter = 1f;
-            Debug.Log(attackCounter);
-            MyAnimator.SetTrigger("IsAttacking");
-
-            if (Input.GetMouseButtonDown(0) && MyAnimator.GetBool("IsWalking") != true && attackCounter == 1f)
-            {
-                attackCounter = 0f;
-                MyAnimator.SetTrigger("IsAttackingAgain");
-            }
+            MyAnimator.SetTrigger("Attack");
         }
-    
     }
 
     private void OnCollisionEnter(Collision Player)
