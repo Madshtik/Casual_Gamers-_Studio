@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GhoulBehaviourTree : MonoBehaviour
 {
-    GhoulNode RootNode;
+    Node RootNode;
     public Transform TargetPlayer;
     public Rigidbody myRB;
 
@@ -20,7 +20,7 @@ public class GhoulBehaviourTree : MonoBehaviour
     public bool isEnraged;
     public bool normalAttack;
     public bool enragedAttack;
-    public bool mouseClickBool;
+    //public bool mouseClickBool;
 
     // Start is called before the first frame update
     void Start()
@@ -28,21 +28,21 @@ public class GhoulBehaviourTree : MonoBehaviour
         myRB = GetComponent<Rigidbody>();
         RootNode = new PrimarySelector();
 
-        RootNode.MyChildren.Add(new FleeSequence());
+        RootNode.MyChildren.Add(new Sequencer());
         RootNode.MyChildren.Add(new FailClass());
-        RootNode.MyChildren.Add(new RangeSequence());
+        RootNode.MyChildren.Add(new Sequencer());
         RootNode.MyChildren.Add(new WanderBehaviour());
 
         RootNode.MyChildren[0].MyChildren.Add(new CheckHP());
         RootNode.MyChildren[0].MyChildren.Add(new FleeBehaviour());
-        RootNode.MyChildren[1].MyChildren.Add(new FailSequence());
+        RootNode.MyChildren[1].MyChildren.Add(new Sequencer());
         RootNode.MyChildren[2].MyChildren.Add(new CheckRange());
-        RootNode.MyChildren[2].MyChildren.Add(new SequenceSelector());
+        RootNode.MyChildren[2].MyChildren.Add(new PrimarySelector());
 
         RootNode.MyChildren[1].MyChildren[0].MyChildren.Add(new CheckHP());
         RootNode.MyChildren[1].MyChildren[0].MyChildren.Add(new EnragedClass());
-        RootNode.MyChildren[2].MyChildren[1].MyChildren.Add(new EnragedSequence());
-        RootNode.MyChildren[2].MyChildren[1].MyChildren.Add(new CalmSequence());
+        RootNode.MyChildren[2].MyChildren[1].MyChildren.Add(new Sequencer());
+        RootNode.MyChildren[2].MyChildren[1].MyChildren.Add(new Sequencer());
 
         RootNode.MyChildren[2].MyChildren[1].MyChildren[0].MyChildren.Add(new CheckEnraged());
         RootNode.MyChildren[2].MyChildren[1].MyChildren[0].MyChildren.Add(new PursuitBehaviour());
@@ -55,19 +55,20 @@ public class GhoulBehaviourTree : MonoBehaviour
     void Update()
     {
         checkDistance = Vector3.Distance(transform.position, TargetPlayer.position);
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             mouseClickBool = true;
-        }
-        RootNode.UpdateState(this);
+        }*/
+        RootNode.GhoulInitializeState(this);
+        RootNode.MyLogicUpdate();
     }
 
     private void OnTriggerEnter(Collider MyTrigger)
     {
-        if (MyTrigger.gameObject.tag.Equals("Sword") && mouseClickBool == true)
+        if (MyTrigger.gameObject.tag.Equals("Sword") /*&& mouseClickBool == true*/)
         {
             myCurrentHP -= swordDamage * (2 * Time.deltaTime);
-            mouseClickBool = false;
+            //mouseClickBool = false;
 
             if (myCurrentHP <= 0f)
             {

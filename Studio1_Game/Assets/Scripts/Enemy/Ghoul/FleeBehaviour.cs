@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FleeBehaviour : GhoulNode
 {
-    public override State UpdateState(GhoulBehaviourTree GBT)
+    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         if (GBT.checkDistance <= 10f && GBT.fleeTimerMax >= 0f)
         {
@@ -22,11 +22,11 @@ public class FleeBehaviour : GhoulNode
         if (GBT.fleeTimerMax <= 1f && GBT.isEnraged != true)
         {
             GBT.mySpeed = 0f;
-            return State.FAILED;
+            myCurrentState = State.FAILED;
         }
   
         GBT.isFleeing = true;
         GBT.isEnraged = false;
-        return State.SUCCESS;
+        myCurrentState = State.SUCCESS;
     }
 }

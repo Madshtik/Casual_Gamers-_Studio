@@ -4,22 +4,12 @@ using UnityEngine;
 
 public class FailClass : GhoulNode
 {
-    public override State UpdateState(GhoulBehaviourTree GBT)
+    public override void MyLogicUpdate()
     {
         for (int i = 0; i < MyChildren.Count; i++)
         {
-            State childState = MyChildren[i].UpdateState(GBT);
-
-            if (childState == State.SUCCESS)
-            {
-                return State.FAILED;
-            }
-
-            if (childState == State.RUNNING)
-            {
-                return State.RUNNING;
-            }
+            MyChildren[i].MyLogicUpdate();
         }
-        return State.FAILED;
+        myCurrentState = State.FAILED;
     }
 }
