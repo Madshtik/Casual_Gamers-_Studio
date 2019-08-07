@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WraithBehaviourTree : MonoBehaviour
 {
-    /*WraithNode RootNode;
+    WraithNode RootNode;
 
     // Start is called before the first frame update
     void Start()
     {
-        RootNode = new PrimarySelector();
-
+        RootNode = new WraithPrimarySelector();
+        
         RootNode.MyChildren.Add(new PatrolSequence());
         RootNode.MyChildren.Add(new WraithFailClass());
     }
@@ -19,5 +19,5 @@ public class WraithBehaviourTree : MonoBehaviour
     void Update()
     {
         RootNode.UpdateState(this);
-    }*/
+    }
 }
