@@ -3879,7 +3879,6 @@ MonoBehaviour:
   isEnraged: 0
   normalAttack: 0
   enragedAttack: 0
-  mouseClickBool: 0
 --- !u!1001 &144897040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17349,6 +17348,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 2203fc6d2e1a73c40a0ceb9fbb996ec1,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9dc60070024e9ba4eaf60c29ac71af20, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2203fc6d2e1a73c40a0ceb9fbb996ec1, type: 3}
 --- !u!1 &850938671

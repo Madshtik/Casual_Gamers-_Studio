@@ -16,6 +16,7 @@ public class Sequencer : Node
 
     public override void MyLogicUpdate()
     {
+        Debug.Log("checking children");
         for (int i = 0; i < MyChildren.Count; i++)
         {
             MyChildren[i].MyLogicUpdate();
