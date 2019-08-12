@@ -6,6 +6,7 @@ public class CheckRange : GhoulNode
 {
     public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
+        Debug.Log("Running Range Check");
         if (GBT.checkDistance <= 10f && GBT.isEnraged != true)
         {
             GBT.normalAttack = true;
