@@ -23,4 +23,8 @@ public class WraithNode: Node
             MyChildren[i].GhoulInitializeState(gManager);
         }
     }
+    public override void MyLogicUpdate()
+    {
+        
+    }
 }

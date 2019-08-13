@@ -11,8 +11,8 @@ public class WraithAttack : WraithNode
     }
 
     // Update is called once per frame
-    void Update()
+    public override void MyLogicUpdate()
     {
-        
+        base.MyLogicUpdate();
     }
 }
