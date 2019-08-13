@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FailClass : GhoulNode
+public class CheckHP : GhoulNode
 {
     public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         gManager = GBT;
-
-        for (int i = 0; i < MyChildren.Count; i++)
-        {
-            MyChildren[i].GhoulInitializeState(gManager);
-        }
     }
 
     public override void MyLogicUpdate()
     {
-        for (int i = 0; i < MyChildren.Count; i++)
+        if (gManager.myCurrentHP <= 10f && gManager.myCurrentHP >= 5f && !gManager.isEnraged)
         {
-            MyChildren[i].MyLogicUpdate();
+            myCurrentState = State.SUCCESS;
         }
+
+        if (gManager.myCurrentHP <= 5f && !gManager.isFleeing)
+        {
+            myCurrentState = State.SUCCESS;
+        }
+
         myCurrentState = State.FAILED;
     }
 }
