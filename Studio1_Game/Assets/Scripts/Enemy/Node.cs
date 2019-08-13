@@ -19,9 +19,5 @@ public abstract class Node
 
     public abstract void GhoulInitializeState(GhoulBehaviourTree GBT);
     public abstract void WraithInitializeState(WraithBehaviourTree WBT);
-
-    public virtual void MyLogicUpdate()
-    {
-        
-    }
+    public abstract void MyLogicUpdate();
 }

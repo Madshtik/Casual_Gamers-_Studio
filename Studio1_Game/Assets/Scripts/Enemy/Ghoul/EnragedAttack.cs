@@ -6,6 +6,12 @@ public class EnragedAttack : GhoulNode
 {
     public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
-        myCurrentState =  State.SUCCESS;
+        gManager = GBT;
+        if (GBT.isEnraged && GBT.enragedAttack && GBT.checkDistance <= 2f)
+        {
+            myCurrentState = State.SUCCESS;
+        }
+
+        myCurrentState = State.FAILED;
     }
 }

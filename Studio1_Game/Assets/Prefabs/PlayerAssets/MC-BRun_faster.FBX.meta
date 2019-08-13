@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: a8f4268dd65b5a244bd470265e35594f
+guid: ba6c8a69305c15e43be22556dfb7fb74
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: WalkF
+    second: WalkB
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: WalkF
+      name: WalkB
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 35
-      lastFrame: 65.625
+      firstFrame: 255
+      lastFrame: 280.2
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
