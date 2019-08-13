@@ -13,6 +13,7 @@ public class GhoulNode : Node
             MyChildren[i].GhoulInitializeState(gManager);
         }
     }
+
     public override void WraithInitializeState(WraithBehaviourTree WBT)
     {
         wManager = WBT;
@@ -21,5 +22,10 @@ public class GhoulNode : Node
         {
             MyChildren[i].WraithInitializeState(wManager);
         }
+    }
+
+    public override void MyLogicUpdate()
+    {
+        
     }
 }

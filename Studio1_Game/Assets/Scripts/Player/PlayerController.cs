@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S))
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
-            MyAnimator.SetBool("IsWalking", true);
+            MyAnimator.SetBool("isWalkingF", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
@@ -65,12 +65,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W))
         {
-            MyAnimator.SetBool("IsWalking", false);
+            MyAnimator.SetBool("isWalkingF", false);
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.back * mySpeed * Time.deltaTime);
+            transform.Translate(Vector3.back * (mySpeed/1.5f) * Time.deltaTime);
+            MyAnimator.SetBool("isWalkingB", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
@@ -79,9 +80,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.S))
         {
-            transform.Translate(Vector3.left * mySpeed * Time.deltaTime);
+            MyAnimator.SetBool("isWalkingB", false);
+        }
+
+        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.left * (mySpeed / 1.5f) * Time.deltaTime);
+            MyAnimator.SetBool("isStrafingL", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
@@ -90,15 +97,26 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.A))
         {
-            transform.Translate(Vector3.right * mySpeed * Time.deltaTime);
+            MyAnimator.SetBool("isStrafingL", false);
+        }
+
+        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.right * (mySpeed / 1.5f) * Time.deltaTime);
+            MyAnimator.SetBool("isStrafingR", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
                 transform.Translate(Vector3.right * myTeleportDistance * mySpeed * Time.deltaTime);
                 myTeleportTimer = 0;
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            MyAnimator.SetBool("isStrafingR", false);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
@@ -119,7 +137,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkF") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkB")
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeR") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeL"))
         {
             MyAnimator.SetTrigger("Attack");
         }

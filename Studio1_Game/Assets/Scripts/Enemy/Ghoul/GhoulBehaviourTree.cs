@@ -6,12 +6,15 @@ public class GhoulBehaviourTree : MonoBehaviour
 {
     Node RootNode;
     public Transform TargetPlayer;
+    public Transform CircleCentre;
     public Rigidbody myRB;
+    public Animator GhoulAnimator;
 
     public float myMaxHP;
     public float myCurrentHP;
     public float mySpeed;
     public float checkDistance;
+    public float circlrRad;
     public float fleeTimerMax;
     public float swordDamage;
     public float myDamage;
@@ -53,13 +56,15 @@ public class GhoulBehaviourTree : MonoBehaviour
 
         RootNode.MyChildren[2].MyChildren[1].MyChildren[1].MyChildren.Add(new PursuitBehaviour());
         RootNode.MyChildren[2].MyChildren[1].MyChildren[1].MyChildren.Add(new Attack());
+
+        RootNode.GhoulInitializeState(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        RootNode.GhoulInitializeState(this);
         checkDistance = Vector3.Distance(transform.position, TargetPlayer.position);
+        circlrRad = Vector3.Distance(transform.position, CircleCentre.position);
         RootNode.MyLogicUpdate();
     }
 
@@ -67,6 +72,7 @@ public class GhoulBehaviourTree : MonoBehaviour
     {
         if (MyTrigger.gameObject.tag.Equals("Sword"))
         {
+            GhoulAnimator.SetBool("isHit", true);
             myCurrentHP -= swordDamage * (2 * Time.deltaTime);
 
             if (myCurrentHP <= 0f)

@@ -6,15 +6,19 @@ public class CheckHP : GhoulNode
 {
     public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
-        Debug.Log("Checking HP");
-        if (GBT.myCurrentHP <= 10f && GBT.myCurrentHP >= 5f && GBT.isEnraged == false)
+        gManager = GBT;
+    }
+
+    public override void MyLogicUpdate()
+    {
+        if (gManager.myCurrentHP <= 10f && gManager.myCurrentHP >= 5f && !gManager.isEnraged)
         {
             myCurrentState = State.SUCCESS;
         }
 
-        if (GBT.myCurrentHP <= 5f && GBT.isFleeing == false)
+        if (gManager.myCurrentHP <= 5f && !gManager.isFleeing)
         {
-            myCurrentState = State.SUCCESS; 
+            myCurrentState = State.SUCCESS;
         }
 
         myCurrentState = State.FAILED;
