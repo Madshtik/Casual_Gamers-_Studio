@@ -924,36 +924,6 @@ Transform:
   m_Father: {fileID: 2117828647351424262}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2951579931302354333
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2847152005456949610}
-  m_Layer: 0
-  m_Name: CircleCentre
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2847152005456949610
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2951579931302354333}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4705568681501796544}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3094629975737374941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,9 +1335,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780636061020750123}
+  - component: {fileID: 495572536}
   m_Layer: 0
   m_Name: Palm_L
-  m_TagString: Untagged
+  m_TagString: Claw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1390,6 +1361,19 @@ Transform:
   m_Father: {fileID: 6443143532932159683}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &495572536
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994519985607104307}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.59717655, y: 0.31920764, z: 0.6419035}
+  m_Center: {x: 0.061975416, y: 0.05272454, z: 0.09470996}
 --- !u!1 &6019138877279522371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +1942,6 @@ Transform:
   - {fileID: 6384443511554886554}
   - {fileID: 762515134629425260}
   - {fileID: 501782769893637445}
-  - {fileID: 2847152005456949610}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -2023,21 +2006,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetPlayer: {fileID: 0}
-  CircleCentre: {fileID: 2847152005456949610}
+  CircleCentre: {fileID: 0}
   myRB: {fileID: 303778597543338135}
   GhoulAnimator: {fileID: 3442872213303887290}
-  myMaxHP: 20
-  myCurrentHP: 20
-  mySpeed: 6
+  myMaxHP: 100
+  myCurrentHP: 100
+  mySpeed: 10
   checkDistance: 0
-  circlrRad: 0
   fleeTimerMax: 5
-  swordDamage: 12.5
-  myDamage: 10
+  swordDamage: 10
+  myDamage: 5
   maxForce: 500
-  isFleeing: 0
+  rotationSlerp: 2.5
   isEnraged: 0
-  normalAttack: 0
   enragedAttack: 0
 --- !u!1 &8784179499006088735
 GameObject:

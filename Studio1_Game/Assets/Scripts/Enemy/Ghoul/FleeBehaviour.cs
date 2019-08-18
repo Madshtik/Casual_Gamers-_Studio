@@ -11,8 +11,14 @@ public class FleeBehaviour : GhoulNode
 
     public override void MyLogicUpdate()
     {
-        if (gManager.myCurrentHP <= 10f && gManager.checkDistance <= 10f && gManager.fleeTimerMax >= 0f)
+        if (gManager.myCurrentHP <= 50f && gManager.checkDistance <= 10f && gManager.fleeTimerMax >= 0f)
         {
+            Debug.Log("RUN");
+            gManager.GhoulAnimator.SetBool("isCrawling", true);
+            Vector3 positionDiff = gManager.transform.position - gManager.TargetPlayer.position;
+            Quaternion rotation = Quaternion.LookRotation(positionDiff);
+            gManager.transform.rotation = Quaternion.Slerp(gManager.transform.rotation, rotation, gManager.rotationSlerp * Time.deltaTime); //rotation
+
             Vector3 vectVelocity = Vector3.Normalize(gManager.transform.position - gManager.TargetPlayer.position) * gManager.mySpeed;
             vectVelocity = new Vector3(vectVelocity.x, 0, vectVelocity.z);
             Vector3 mySteering = vectVelocity - gManager.myRB.velocity;
@@ -20,19 +26,14 @@ public class FleeBehaviour : GhoulNode
             Vector3.ClampMagnitude(mySteering, gManager.maxForce);
 
             gManager.myRB.AddForce(mySteering);
-            gManager.GhoulAnimator.SetBool("isPursuing", true);
             gManager.fleeTimerMax -= 1f * Time.deltaTime;
+           
+            myCurrentState = State.SUCCESS;
         }
 
-        if (gManager.fleeTimerMax <= 1f && gManager.isEnraged != true)
+        if (gManager.fleeTimerMax <= 1f)
         {
-            gManager.mySpeed = 0f;
-            gManager.GhoulAnimator.SetBool("isPursuing", false);
             myCurrentState = State.FAILED;
         }
-
-        gManager.isFleeing = true;
-        gManager.isEnraged = false;
-        myCurrentState = State.SUCCESS;
     }
 }

@@ -29,11 +29,6 @@ public class LevelUpScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!playerNear)
-        //{
-        //    Debug.Log(Vector3.Distance(transform.position, PlayerGO.transform.position));
-        //}
-
         if (!playerNear && Vector3.Distance(transform.position, PlayerGO.transform.position) < dist)
         {
             playerNear = true;

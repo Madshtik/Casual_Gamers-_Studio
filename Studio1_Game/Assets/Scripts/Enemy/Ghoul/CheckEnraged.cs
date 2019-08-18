@@ -7,8 +7,13 @@ public class CheckEnraged : GhoulNode
     public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         gManager = GBT;
-        if (GBT.isEnraged == true && GBT.enragedAttack == true)
+    }
+
+    public override void MyLogicUpdate()
+    {
+        if (gManager.isEnraged && gManager.enragedAttack)
         {
+            Debug.Log("Check Enraged");
             myCurrentState = State.SUCCESS;
         }
 

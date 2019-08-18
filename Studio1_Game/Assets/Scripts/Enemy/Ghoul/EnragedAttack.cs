@@ -7,7 +7,12 @@ public class EnragedAttack : GhoulNode
     public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         gManager = GBT;
-        if (GBT.isEnraged && GBT.enragedAttack && GBT.checkDistance <= 2f)
+    }
+
+    public override void MyLogicUpdate()
+    {
+        Debug.Log("time to die");
+        if (gManager.isEnraged && gManager.enragedAttack && gManager.checkDistance <= 2f)
         {
             myCurrentState = State.SUCCESS;
         }

@@ -11,16 +11,15 @@ public class CheckHP : GhoulNode
 
     public override void MyLogicUpdate()
     {
-        if (gManager.myCurrentHP <= 10f && gManager.myCurrentHP >= 5f && !gManager.isEnraged)
+        Debug.Log("checking");
+        if (gManager.myCurrentHP <= 50f && gManager.myCurrentHP >= 15f)
         {
             myCurrentState = State.SUCCESS;
+            Debug.Log("HP Success");
         }
-
-        if (gManager.myCurrentHP <= 5f && !gManager.isFleeing)
+        else
         {
-            myCurrentState = State.SUCCESS;
+            myCurrentState = State.FAILED;
         }
-
-        myCurrentState = State.FAILED;
     }
 }

@@ -6,29 +6,17 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody Player;
 
-    [SerializeField]
-    float mySpeed;
-
-    [SerializeField]
-    float myJumpHeight;
-
-    [SerializeField]
-    float myTeleportDistance;
-
-    [SerializeField]
-    float myTeleportTimer;
-
-    [SerializeField]
-    float myTeleportTimerMax;
-
-    //float attackTimer;
-
-    bool attackedOnce = false;
+    public float mySpeed;
+    public float myJumpHeight;
+    public float myTeleportDistance;
+    public float myTeleportTimer;
+    public float myTeleportTimerMax;
+    public float myHealth;
+    public float clawDamage;
 
     bool isJumping = false;
 
-    [SerializeField]
-    Animator MyAnimator;
+    public Animator MyAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +30,7 @@ public class PlayerController : MonoBehaviour
         Plane levelPlane = new Plane(Vector3.up, transform.position);
         Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        float rayHitDist = 0.0f;
+        float rayHitDist;
 
         if (levelPlane.Raycast(myRay, out rayHitDist))
         {
@@ -51,7 +39,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, playerRotate, mySpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S)
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
             MyAnimator.SetBool("isWalkingF", true);
@@ -68,7 +57,8 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetBool("isWalkingF", false);
         }
 
-        if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.back * (mySpeed/1.5f) * Time.deltaTime);
             MyAnimator.SetBool("isWalkingB", true);
@@ -85,7 +75,8 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetBool("isWalkingB", false);
         }
 
-        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S)
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.left * (mySpeed / 1.5f) * Time.deltaTime);
             MyAnimator.SetBool("isStrafingL", true);
@@ -102,7 +93,8 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetBool("isStrafingL", false);
         }
 
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S)
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.right * (mySpeed / 1.5f) * Time.deltaTime);
             MyAnimator.SetBool("isStrafingR", true);
@@ -149,6 +141,18 @@ public class PlayerController : MonoBehaviour
         if (Player.gameObject.tag == "Floor")
         {
             isJumping = false;
+        }
+    }
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Claw")
+        {
+            myHealth -= clawDamage;
+
+            if (myHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
