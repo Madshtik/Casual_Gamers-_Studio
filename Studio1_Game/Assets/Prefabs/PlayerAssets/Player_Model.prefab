@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1518885781
 Transform:
   m_ObjectHideFlags: 0
@@ -43,7 +43,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1.5
-  m_Range: 30
+  m_Range: 40
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -676,12 +676,12 @@ MonoBehaviour:
   Player: {fileID: 6245521081558262318}
   ShootPoint: {fileID: 5363501334132942000}
   mySpeed: 7.5
-  myJumpHeight: 10
+  myJumpHeight: 7.5
   myTeleportDistance: 50
   myTeleportTimer: 3
   myTeleportTimerMax: 3
   myHealth: 100
-  clawDamage: 10
+  clawDamage: 4.5
   MyAnimator: {fileID: 3272503548067565383}
 --- !u!1 &1560172893727541490
 GameObject:

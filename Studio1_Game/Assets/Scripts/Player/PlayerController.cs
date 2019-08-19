@@ -137,8 +137,11 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetTrigger("Attack");
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2") 
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkF") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkB")
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeR") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeL"))
         {
+            MyAnimator.SetTrigger("FireBolt");
             Shoot();
         }
     }
@@ -150,6 +153,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
     }
+
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Claw")
