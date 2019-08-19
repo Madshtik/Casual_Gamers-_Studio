@@ -6,7 +6,6 @@ public class GhoulBehaviourTree : MonoBehaviour
 {
     Node RootNode;
     public Transform TargetPlayer;
-    public Transform CircleCentre;
     public Rigidbody myRB;
     public Animator GhoulAnimator;
 
@@ -65,6 +64,10 @@ public class GhoulBehaviourTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (TargetPlayer == null)
+        {
+            TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         checkDistance = Vector3.Distance(transform.position, TargetPlayer.position);
         RootNode.MyLogicUpdate();
     }

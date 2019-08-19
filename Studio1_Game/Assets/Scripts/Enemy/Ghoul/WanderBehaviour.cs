@@ -18,6 +18,8 @@ public class WanderBehaviour : GhoulNode
         //float angleChange = Random.Range(50f, 100f);
         //float wanderAngle = Mathf.LerpAngle(minAngle, maxAngle, angleChange * Time.deltaTime);
 
+        //Vector3 CircleCentre = new Vector3(0, 0, gManager.transform.position.z + 10);
+
         //Vector3 wanderCircleRadius = new Vector3(gManager.CircleCentre.position.x + 5, 0, gManager.CircleCentre.position.z + 5); //setting the radius
         ////Vector3 circleVectVelocity = Vector3.Normalize(gManager.CircleCentre.position - gManager.transform.position) * gManager.mySpeed;     
         ////Vector3 circlePosition = gManager.transform.position + circleVectVelocity * gManager.circleDistance;

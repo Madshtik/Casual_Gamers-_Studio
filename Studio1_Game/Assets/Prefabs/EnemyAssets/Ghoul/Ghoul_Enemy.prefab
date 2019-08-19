@@ -2006,7 +2006,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetPlayer: {fileID: 0}
-  CircleCentre: {fileID: 0}
   myRB: {fileID: 303778597543338135}
   GhoulAnimator: {fileID: 3442872213303887290}
   myMaxHP: 100

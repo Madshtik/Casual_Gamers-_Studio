@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody Player;
 
+    public Transform ShootPoint;
+
     public float mySpeed;
     public float myJumpHeight;
     public float myTeleportDistance;
@@ -134,6 +136,11 @@ public class PlayerController : MonoBehaviour
         {
             MyAnimator.SetTrigger("Attack");
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Shoot();
+        }
     }
 
     private void OnCollisionEnter(Collision Player)
@@ -154,5 +161,17 @@ public class PlayerController : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    void Shoot()
+    {
+        GameObject bullet = ObjectPoolClass.instance.PlayerBulletToSpawn(); //taking method from ObjectPoolClass
+        if (bullet == null)
+        {
+            return;
+        }
+        bullet.transform.position = ShootPoint.position;
+        bullet.transform.rotation = transform.rotation;
+        bullet.SetActive(true);
     }
 }
