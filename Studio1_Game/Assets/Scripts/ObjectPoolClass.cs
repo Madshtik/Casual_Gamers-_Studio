@@ -8,16 +8,16 @@ public class ObjectPoolClass : MonoBehaviour
     //public GameObject Wraith;
     public GameObject playerBullets;
     //public GameObject WraithBullets;
-    public Transform Player;
-    public GameObject spawnPoint;
+    //public Transform Player;
+    //public GameObject spawnPoint;
 
     public List<GameObject> pooledBullets;
     public List<GameObject> pooledGhouls;
 
     public float playerDist;
 
-    int poolMax = 1;
-    int newPoolMax = 15;
+    int poolMax = 10;
+    int newPoolMax = 35;
 
     //Singleton
     public static ObjectPoolClass instance;
@@ -43,12 +43,12 @@ public class ObjectPoolClass : MonoBehaviour
 
     void Update()
     {
-        playerDist = Vector3.Distance(transform.position, Player.position);
+        //playerDist = Vector3.Distance(transform.position, Player.position);
 
-        if (playerDist <= 15f)
-        {
-            SpawnGhoul();
-        }
+        //if (playerDist <= 15f)
+        //{
+        //    SpawnGhoul();
+        //}
     }
 
     public GameObject PlayerBulletToSpawn()
@@ -72,21 +72,21 @@ public class ObjectPoolClass : MonoBehaviour
         return null;
     }
 
-    public void SpawnGhoul()
-    {
-        for (int i = 0; i < pooledGhouls.Count; i++)
-        {
-            if (!pooledGhouls[i].activeInHierarchy)
-            {
-                GameObject ghoul = pooledGhouls[i];
-                if (ghoul == null)
-                {
-                    return;
-                }
-                ghoul.transform.position = spawnPoint.transform.position;
-                ghoul.transform.rotation = transform.rotation;
-                ghoul.SetActive(true);
-            }
-        }
-    }
+    //public void SpawnGhoul()
+    //{
+    //    for (int i = 0; i < pooledGhouls.Count; i++)
+    //    {
+    //        if (!pooledGhouls[i].activeInHierarchy)
+    //        {
+    //            GameObject ghoul = pooledGhouls[i];
+    //            if (ghoul == null)
+    //            {
+    //                return;
+    //            }
+    //            ghoul.transform.position = spawnPoint.transform.position;
+    //            ghoul.transform.rotation = transform.rotation;
+    //            ghoul.SetActive(true);
+    //        }
+    //    }
+    //}
 }

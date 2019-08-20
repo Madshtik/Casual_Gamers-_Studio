@@ -41,7 +41,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 2
-  m_Color: {r: 0, g: 0.991797, b: 1, a: 1}
+  m_Color: {r: 0.06533998, g: 0.59386784, b: 0.726, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
@@ -196,5 +196,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4ab119036cce24b94906b0d47050c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myBulletSpeed: 25
+  myBulletSpeed: 30
   myBulletTimer: 5
