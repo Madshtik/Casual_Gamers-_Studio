@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghoul: {fileID: 8581274907953388243, guid: aeab5203fa2762048a8427065ca25a9d, type: 3}
-  playerBullets: {fileID: 3096184289216374521, guid: 64c6c77e1184a0849b3db24ad4896f3b,
+  playerBullets: {fileID: 7355594114821694509, guid: 4dd059793606af348bbcb6319624006e,
     type: 3}
   pooledBullets: []
   pooledGhouls: []
