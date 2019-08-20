@@ -26,25 +26,22 @@ public class Sequencer : Node
 
     public override void MyLogicUpdate()
     {
-        
-        for (int i = 0; i < MyChildren.Count; i++)
+        for (int i = 0; i < MyChildren.Count; i++) //the sequencer will update its state by asking it's children to update theirs
         {
             MyChildren[i].MyLogicUpdate();
 
             if (MyChildren[i].myCurrentState == State.RUNNING)
             {
-                
                 myCurrentState = State.RUNNING;
                 return;
             }
             else if (MyChildren[i].myCurrentState == State.FAILED)
             {
-               
                 myCurrentState = State.FAILED;
+                Debug.Log("Failed child");
                 return;
             }
         }
-       
         myCurrentState = State.SUCCESS;
     }
 }

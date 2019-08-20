@@ -6,7 +6,6 @@ public class GhoulBehaviourTree : MonoBehaviour
 {
     Node RootNode;
     public Transform TargetPlayer;
-    public Transform CircleCentre;
     public Rigidbody myRB;
     public Animator GhoulAnimator;
 
@@ -14,28 +13,28 @@ public class GhoulBehaviourTree : MonoBehaviour
     public float myCurrentHP;
     public float mySpeed;
     public float checkDistance;
-    public float circlrRad;
     public float fleeTimerMax;
     public float swordDamage;
     public float myDamage;
     public float maxForce;
+    public float rotationSlerp;
 
-    public bool isFleeing;
     public bool isEnraged;
-    public bool normalAttack;
     public bool enragedAttack;
 
     // Start is called before the first frame update
     void Start()
     {
         myRB = GetComponent<Rigidbody>();
-        RootNode = new PrimarySelector();
+        RootNode = new PrimarySelector(); //sets the PrimarySelector as the root node of the behavior tree
 
+        //------first generation children------
         RootNode.MyChildren.Add(new Sequencer());
         RootNode.MyChildren.Add(new FailClass());
         RootNode.MyChildren.Add(new Sequencer());
         RootNode.MyChildren.Add(new WanderBehaviour());
 
+        //------second generation children------
         RootNode.MyChildren[0].MyChildren.Add(new CheckHP());
         RootNode.MyChildren[0].MyChildren.Add(new FleeBehaviour());
 
@@ -44,12 +43,14 @@ public class GhoulBehaviourTree : MonoBehaviour
         RootNode.MyChildren[2].MyChildren.Add(new CheckRange());
         RootNode.MyChildren[2].MyChildren.Add(new PrimarySelector());
 
-        RootNode.MyChildren[1].MyChildren[0].MyChildren.Add(new CheckHP());
+        //------third generation children------
+        RootNode.MyChildren[1].MyChildren[0].MyChildren.Add(new CheckHPEnraged());
         RootNode.MyChildren[1].MyChildren[0].MyChildren.Add(new EnragedClass());
 
         RootNode.MyChildren[2].MyChildren[1].MyChildren.Add(new Sequencer());
         RootNode.MyChildren[2].MyChildren[1].MyChildren.Add(new Sequencer());
 
+        //------fourth generation children------
         RootNode.MyChildren[2].MyChildren[1].MyChildren[0].MyChildren.Add(new CheckEnraged());
         RootNode.MyChildren[2].MyChildren[1].MyChildren[0].MyChildren.Add(new PursuitBehaviour());
         RootNode.MyChildren[2].MyChildren[1].MyChildren[0].MyChildren.Add(new EnragedAttack());
@@ -63,17 +64,20 @@ public class GhoulBehaviourTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (TargetPlayer == null)
+        {
+            TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         checkDistance = Vector3.Distance(transform.position, TargetPlayer.position);
-        circlrRad = Vector3.Distance(transform.position, CircleCentre.position);
         RootNode.MyLogicUpdate();
     }
 
     private void OnTriggerEnter(Collider MyTrigger)
     {
-        if (MyTrigger.gameObject.tag.Equals("Sword"))
+        if (MyTrigger.gameObject.tag.Equals("Sword")) //detects the player's sword trigger and reduces the health of the ghoul
         {
             GhoulAnimator.SetBool("isHit", true);
-            myCurrentHP -= swordDamage * (2 * Time.deltaTime);
+            myCurrentHP -= swordDamage;
 
             if (myCurrentHP <= 0f)
             {

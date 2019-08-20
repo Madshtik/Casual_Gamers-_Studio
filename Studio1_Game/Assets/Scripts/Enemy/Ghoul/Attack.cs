@@ -7,11 +7,19 @@ public class Attack : GhoulNode
     public override void GhoulInitializeState(GhoulBehaviourTree GBT)
     {
         gManager = GBT;
-        if (GBT.normalAttack && !GBT.isFleeing && GBT.checkDistance <= 1f)
+    }
+
+    public override void MyLogicUpdate()
+    {
+        Debug.Log("fight!");
+        if (gManager.checkDistance <= 3f && !gManager.GhoulAnimator.GetCurrentAnimatorStateInfo(0).IsName("Crawl"))
         {
-            GBT.GhoulAnimator.SetTrigger("Attack");
+            gManager.GhoulAnimator.SetTrigger("Attack");
             myCurrentState = State.SUCCESS;
         }
-        myCurrentState = State.FAILED;
+        else
+        {
+            myCurrentState = State.FAILED;
+        }
     }
 }

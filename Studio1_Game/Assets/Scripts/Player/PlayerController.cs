@@ -6,29 +6,19 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody Player;
 
-    [SerializeField]
-    float mySpeed;
+    public Transform ShootPoint;
 
-    [SerializeField]
-    float myJumpHeight;
-
-    [SerializeField]
-    float myTeleportDistance;
-
-    [SerializeField]
-    float myTeleportTimer;
-
-    [SerializeField]
-    float myTeleportTimerMax;
-
-    //float attackTimer;
-
-    bool attackedOnce = false;
+    public float mySpeed;
+    public float myJumpHeight;
+    public float myTeleportDistance;
+    public float myTeleportTimer;
+    public float myTeleportTimerMax;
+    public float myHealth;
+    public float clawDamage;
 
     bool isJumping = false;
 
-    [SerializeField]
-    Animator MyAnimator;
+    public Animator MyAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +32,7 @@ public class PlayerController : MonoBehaviour
         Plane levelPlane = new Plane(Vector3.up, transform.position);
         Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        float rayHitDist = 0.0f;
+        float rayHitDist;
 
         if (levelPlane.Raycast(myRay, out rayHitDist))
         {
@@ -51,7 +41,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, playerRotate, mySpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S)
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
             MyAnimator.SetBool("isWalkingF", true);
@@ -68,7 +59,8 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetBool("isWalkingF", false);
         }
 
-        if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.back * (mySpeed/1.5f) * Time.deltaTime);
             MyAnimator.SetBool("isWalkingB", true);
@@ -85,7 +77,8 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetBool("isWalkingB", false);
         }
 
-        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S)
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.left * (mySpeed / 1.5f) * Time.deltaTime);
             MyAnimator.SetBool("isStrafingL", true);
@@ -102,7 +95,8 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetBool("isStrafingL", false);
         }
 
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S)
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.right * (mySpeed / 1.5f) * Time.deltaTime);
             MyAnimator.SetBool("isStrafingR", true);
@@ -142,6 +136,14 @@ public class PlayerController : MonoBehaviour
         {
             MyAnimator.SetTrigger("Attack");
         }
+
+        if (Input.GetMouseButtonDown(1) && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2") 
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkF") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkB")
+            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeR") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeL"))
+        {
+            MyAnimator.SetTrigger("FireBolt");
+            Shoot();
+        }
     }
 
     private void OnCollisionEnter(Collision Player)
@@ -150,5 +152,30 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
         }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Claw")
+        {
+            myHealth -= clawDamage;
+
+            if (myHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    void Shoot()
+    {
+        GameObject bullet = ObjectPoolClass.instance.PlayerBulletToSpawn(); //taking method from ObjectPoolClass
+        if (bullet == null)
+        {
+            return;
+        }
+        bullet.transform.position = ShootPoint.position;
+        bullet.transform.rotation = transform.rotation;
+        bullet.SetActive(true);
     }
 }

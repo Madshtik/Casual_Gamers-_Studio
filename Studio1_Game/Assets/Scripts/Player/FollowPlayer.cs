@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    [SerializeField]
-    Transform Player;
+    public Transform Player;
 
     Vector3 camOffset;
 
-    float slerpMultiplier = 0.025f;
+    float slerpMultiplier = 0.25f;
 
     // Start is called before the first frame update
     void Start()
