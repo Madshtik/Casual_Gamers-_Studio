@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class WraithEnragedAttack : WraithNode
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    public override void WraithInitializeState(WraithBehaviourTree WBT)
     {
-        
-    }
+        wManager = WBT;
 
-    // Update is called once per frame
-    void Update()
+
+    }
+    public override void MyLogicUpdate()
     {
-        
+        wManager.PlasmaShot();
     }
 }

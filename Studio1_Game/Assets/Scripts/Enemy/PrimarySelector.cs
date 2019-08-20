@@ -33,11 +33,13 @@ public class PrimarySelector : Node
             if (MyChildren[i].myCurrentState == State.SUCCESS)
             {
                 myCurrentState = State.SUCCESS;
+                return;
             }
 
             if (MyChildren[i].myCurrentState == State.RUNNING)
             {
                 myCurrentState = State.RUNNING;
+                return;
             }
         }
         myCurrentState = State.FAILED;

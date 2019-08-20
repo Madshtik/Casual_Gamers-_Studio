@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class WraithCheckHP : WraithNode
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void WraithInitializeState(WraithBehaviourTree WBT)
     {
-        
-    }
+        wManager = WBT;
 
-    // Update is called once per frame
-    void Update()
+
+    }
+    public override void MyLogicUpdate()
     {
-        
+        if (wManager.health < wManager.enragedHP)
+        {
+            myCurrentState = State.SUCCESS;
+        }
+        else {
+            myCurrentState = State.FAILED;
+
+        }
     }
 }
