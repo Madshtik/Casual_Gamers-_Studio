@@ -35,7 +35,11 @@ public class LevelUpScript : MonoBehaviour
         }
         if (playerNear)
         {
-            fader.a += .05f;
+            if (fader.a <= 1)
+            {
+                fader.a += .05f;
+            }
+            
             myMat.color = fader;
             Vector3 desiredPos = new Vector3(myInitialPos.x, myInitialPos.y + 10f, myInitialPos.z);
             Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothingSpeed);

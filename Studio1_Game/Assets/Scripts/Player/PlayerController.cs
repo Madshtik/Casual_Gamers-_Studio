@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform ShootPoint;
 
+    GhoulBehaviourTree ghoul;
+
     public float mySpeed;
     public float myJumpHeight;
     public float myTeleportDistance;
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float myTeleportTimerMax;
     public float myHealth;
     public float clawDamage;
+    public float damageMod;
 
     bool isJumping = false;
 
@@ -144,6 +147,17 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetTrigger("FireBolt");
             Shoot();
         }
+
+        if (MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") || MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+        {
+            DamageSingleton.instance.swordSwing = true;
+            Debug.Log("attacking");
+        }
+        else
+        {
+            DamageSingleton.instance.swordSwing = false;
+            Debug.Log("not attacking");
+        }
     }
 
     private void OnCollisionEnter(Collision Player)
@@ -158,7 +172,15 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "Claw")
         {
-            myHealth -= clawDamage;
+            if (col.transform.parent.transform.parent.transform.parent.transform.parent.transform.parent.
+                transform.parent.transform.parent.transform.parent.transform.parent.gameObject.GetComponent<GhoulBehaviourTree>().isEnraged)
+            {
+                myHealth -= clawDamage + damageMod;
+            }
+            else
+            {
+                myHealth -= clawDamage;
+            }
 
             if (myHealth <= 0)
             {

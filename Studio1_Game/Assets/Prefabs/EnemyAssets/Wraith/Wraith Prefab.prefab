@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 5578419959576947412}
   m_Layer: 0
   m_Name: Wraith Prefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -629,7 +629,7 @@ Animator:
   m_GameObject: {fileID: 1566088822285546941}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: edbef8f634dfb3542a2df6d3c4ecf703, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 900f8b0c324be084c8bd672f9aa7ecd7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

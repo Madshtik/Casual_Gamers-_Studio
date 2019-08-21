@@ -2005,19 +2005,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d0090e79e5c9b43a6ade6d489111f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPlayer: {fileID: 0}
+  targetPlayer: {fileID: 0}
+  myHealth: 180
+  mySpeed: 10
+  isEnraged: 0
+  swordDamage: 15
   myRB: {fileID: 303778597543338135}
   GhoulAnimator: {fileID: 3442872213303887290}
-  myMaxHP: 100
-  myCurrentHP: 100
-  mySpeed: 10
   checkDistance: 0
-  fleeTimerMax: 5
-  swordDamage: 10
-  myDamage: 5
   maxForce: 500
   rotationSlerp: 2.5
-  isEnraged: 0
+  deathTimer: 5
   enragedAttack: 0
 --- !u!1 &8784179499006088735
 GameObject:

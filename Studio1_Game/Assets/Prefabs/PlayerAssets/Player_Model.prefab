@@ -680,8 +680,9 @@ MonoBehaviour:
   myTeleportDistance: 50
   myTeleportTimer: 3
   myTeleportTimerMax: 3
-  myHealth: 100
-  clawDamage: 4.5
+  myHealth: 500
+  clawDamage: 10
+  damageMod: 5
   MyAnimator: {fileID: 3272503548067565383}
 --- !u!1 &1560172893727541490
 GameObject:
@@ -1302,8 +1303,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.8097544, y: 5.4532084, z: 20.317955}
-  m_Center: {x: -7.272007, y: 2.3371174, z: 22.67782}
+  m_Size: {x: 10.239337, y: 5.4532084, z: 41.174446}
+  m_Center: {x: -8.385006, y: 2.336962, z: 25.293793}
 --- !u!1 &3629286839529228386
 GameObject:
   m_ObjectHideFlags: 0

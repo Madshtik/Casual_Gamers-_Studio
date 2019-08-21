@@ -2,25 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckRange : GhoulNode
+public class CheckRange : Node
 {
-    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
-    {
-        gManager = GBT;
-    }
+
 
     public override void MyLogicUpdate()
     {
         
-        if (gManager.checkDistance <= 20f)
+        if ((bTManager as GhoulBehaviourTree).checkDistance <= 20f && bTManager.myHealth >= 1f)
         {
-            Debug.Log("Hbaahaug");
+            //Debug.Log("Hbaahaug");
             myCurrentState = State.SUCCESS;
         }
-
-        if (gManager.checkDistance >= 20f)
+        else
         {
-            Debug.Log("No Hbaahaug");
+            (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", false);
             myCurrentState = State.FAILED;
         }
     }

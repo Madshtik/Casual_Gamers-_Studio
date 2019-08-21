@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WanderBehaviour : GhoulNode
+public class WanderBehaviour : Node
 {
-    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
-    {
-        gManager = GBT;
-    }
+
 
     public override void MyLogicUpdate()
     {
-        Debug.Log("ROAM");
+        //Debug.Log("ROAM");
 
         //float minAngle = 0f;
         //float maxAngle = 180f;
@@ -37,6 +34,6 @@ public class WanderBehaviour : GhoulNode
 
         //gManager.myRB.AddForce(mySteering);
 
-        //myCurrentState = State.SUCCESS;
+        myCurrentState = State.FAILED;
     }
 }

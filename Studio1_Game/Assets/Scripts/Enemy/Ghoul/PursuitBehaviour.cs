@@ -2,53 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PursuitBehaviour : GhoulNode
+public class PursuitBehaviour : Node
 { 
-    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
-    {
-        gManager = GBT;
-    }
+ 
 
     public override void MyLogicUpdate()
     {
-        Debug.Log("HEYYYY");
-        gManager.GhoulAnimator.SetBool("isCrawling", true);
+        //Debug.Log("HEYYYY");
 
         float slowingRadius = 5f;
 
-        Vector3 positionDiff = gManager.TargetPlayer.position - gManager.transform.position;
+        Vector3 positionDiff = bTManager.targetPlayer.position - (bTManager as GhoulBehaviourTree).transform.position;
         Quaternion rotation = Quaternion.LookRotation(positionDiff);
-        gManager.transform.rotation = Quaternion.Slerp(gManager.transform.rotation, rotation, gManager.rotationSlerp * Time.deltaTime); //rotation towards the target player
+        (bTManager as GhoulBehaviourTree).transform.rotation = Quaternion.Slerp((bTManager as GhoulBehaviourTree).transform.rotation, rotation, (bTManager as GhoulBehaviourTree).rotationSlerp * Time.deltaTime); //rotation towards the target player
 
-        if (gManager.checkDistance <= slowingRadius)
+        if ((bTManager as GhoulBehaviourTree).checkDistance <= slowingRadius)
         {
-            Vector3 vectVelocity = Vector3.Normalize(gManager.TargetPlayer.position - gManager.transform.position) * gManager.mySpeed * (gManager.checkDistance / slowingRadius);
+            (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", true);
+            Vector3 vectVelocity = Vector3.Normalize(bTManager.targetPlayer.position - (bTManager as GhoulBehaviourTree).transform.position) * (bTManager as GhoulBehaviourTree).mySpeed * ((bTManager as GhoulBehaviourTree).checkDistance / slowingRadius);
             vectVelocity = new Vector3(vectVelocity.x, 0, vectVelocity.z);
-            Vector3 mySteering = vectVelocity - gManager.myRB.velocity;
+            Vector3 mySteering = vectVelocity - (bTManager as GhoulBehaviourTree).myRB.velocity;
 
-            Vector3.ClampMagnitude(mySteering, gManager.maxForce);
+            Vector3.ClampMagnitude(mySteering, (bTManager as GhoulBehaviourTree).maxForce);
+ 
+            (bTManager as GhoulBehaviourTree).myRB.AddForce(mySteering);
 
-            gManager.myRB.AddForce(mySteering);
-
-            Debug.Log(mySteering);
-
-            if (gManager.checkDistance <= 3f)
+            if ((bTManager as GhoulBehaviourTree).checkDistance <= 3f)
             {
-                gManager.GhoulAnimator.SetBool("isCrawling", false);
+                 (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", false);
             }
         }
         else
         {
-            Vector3 vectVelocity = Vector3.Normalize(gManager.TargetPlayer.position - gManager.transform.position) * gManager.mySpeed;
+             (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", true);
+            Vector3 vectVelocity = Vector3.Normalize(bTManager.targetPlayer.position -  (bTManager as GhoulBehaviourTree).transform.position) *  (bTManager as GhoulBehaviourTree).mySpeed;
 
             vectVelocity = new Vector3(vectVelocity.x, 0, vectVelocity.z);
-            Vector3 mySteering = vectVelocity - gManager.myRB.velocity;
+            Vector3 mySteering = vectVelocity -  (bTManager as GhoulBehaviourTree).myRB.velocity;
 
-            Vector3.ClampMagnitude(mySteering, gManager.maxForce);
+            Vector3.ClampMagnitude(mySteering,  (bTManager as GhoulBehaviourTree).maxForce);
 
-            gManager.myRB.AddForce(mySteering);
+            (bTManager as GhoulBehaviourTree).myRB.AddForce(mySteering);
+
         }
-
-        myCurrentState = State.SUCCESS;
+        if ((bTManager as GhoulBehaviourTree).checkDistance <= 3f)
+        {
+            myCurrentState = State.SUCCESS;
+        }
+        else
+        {
+            myCurrentState = State.RUNNING;
+        }
     }
 }

@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolBehavior : WraithNode
+public class PatrolBehavior : Node
 {
     int pRange;
    
-    public override void WraithInitializeState(WraithBehaviourTree WBT)
+
+    public override void InitializeState(BaseBT BTM)
     {
-        wManager = WBT;
-
-        for (int i = 0; i < wManager.patrolPoints.Length; i++)
+        base.InitializeState(BTM);
+        for (int i = 0; i < (bTManager as WraithBehaviourTree).patrolPoints.Length; i++)
         {
-            wManager.patrolPoints[i] = new GameObject();
-            pRange = Random.Range(-wManager.patrolRange, wManager.patrolRange);
-            wManager.patrolPoints[i].gameObject.transform.position = new Vector3(wManager.transform.position.x + pRange, wManager.transform.position.y, wManager.transform.position.z);
+            (bTManager as WraithBehaviourTree).patrolPoints[i] = new GameObject();
+            pRange = Random.Range(-(bTManager as WraithBehaviourTree).patrolRange, (bTManager as WraithBehaviourTree).patrolRange);
+            (bTManager as WraithBehaviourTree).patrolPoints[i].gameObject.transform.position = new Vector3((bTManager as WraithBehaviourTree).transform.position.x + pRange, (bTManager as WraithBehaviourTree).transform.position.y, (bTManager as WraithBehaviourTree).transform.position.z);
 
-            pRange = Random.Range(-wManager.patrolRange, wManager.patrolRange);
-            wManager.patrolPoints[i].gameObject.transform.position = new Vector3(wManager.patrolPoints[i].gameObject.transform.position.x, wManager.transform.position.y, wManager.transform.position.z + pRange);
+            pRange = Random.Range(-(bTManager as WraithBehaviourTree).patrolRange, (bTManager as WraithBehaviourTree).patrolRange);
+            (bTManager as WraithBehaviourTree).patrolPoints[i].gameObject.transform.position = new Vector3((bTManager as WraithBehaviourTree).patrolPoints[i].gameObject.transform.position.x, (bTManager as WraithBehaviourTree).transform.position.y, (bTManager as WraithBehaviourTree).transform.position.z + pRange);
 
 
         }
@@ -25,20 +25,20 @@ public class PatrolBehavior : WraithNode
     public override void MyLogicUpdate()
     {
       
-       // wManager.transform.LookAt(wManager.patrolPoints[wManager.patrolIndex].gameObject.transform.position);
-        Quaternion lookOnLook = Quaternion.LookRotation(wManager.patrolPoints[wManager.patrolIndex].gameObject.transform.position - wManager.transform.position);
-        wManager.transform.rotation = Quaternion.Slerp(wManager.transform.rotation, lookOnLook, .05f);
-       // wManager.transform.Translate(wManager.transform.forward * wManager.moveSpeed * Time.deltaTime);
-        wManager.transform.Translate(0,0,1 * wManager.moveSpeed * Time.deltaTime);
+       // (bTManager as WraithBehaviourTree).transform.LookAt((bTManager as WraithBehaviourTree).patrolPoints[(bTManager as WraithBehaviourTree).patrolIndex].gameObject.transform.position);
+        Quaternion lookOnLook = Quaternion.LookRotation((bTManager as WraithBehaviourTree).patrolPoints[(bTManager as WraithBehaviourTree).patrolIndex].gameObject.transform.position - (bTManager as WraithBehaviourTree).transform.position);
+        (bTManager as WraithBehaviourTree).transform.rotation = Quaternion.Slerp((bTManager as WraithBehaviourTree).transform.rotation, lookOnLook, .05f);
+       // (bTManager as WraithBehaviourTree).transform.Translate((bTManager as WraithBehaviourTree).transform.forward * (bTManager as WraithBehaviourTree).moveSpeed * Time.deltaTime);
+        (bTManager as WraithBehaviourTree).transform.Translate(0,0,1 * bTManager.mySpeed * Time.deltaTime);
 
         myCurrentState = State.RUNNING;
-        if (Vector3.Distance(wManager.transform.position, wManager.patrolPoints[wManager.patrolIndex].gameObject.transform.position) <= 2)
+        if (Vector3.Distance((bTManager as WraithBehaviourTree).transform.position, (bTManager as WraithBehaviourTree).patrolPoints[(bTManager as WraithBehaviourTree).patrolIndex].gameObject.transform.position) <= 2)
         {
-            wManager.patrolIndex++;
+            (bTManager as WraithBehaviourTree).patrolIndex++;
             myCurrentState = State.SUCCESS;
-            if (wManager.patrolIndex > 3)
+            if ((bTManager as WraithBehaviourTree).patrolIndex > 3)
             {
-                wManager.patrolIndex = 0;
+                (bTManager as WraithBehaviourTree).patrolIndex = 0;
             }
         }
     }

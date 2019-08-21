@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WraithCheckHP : WraithNode
+public class WraithCheckHP : Node
 {
-    public override void WraithInitializeState(WraithBehaviourTree WBT)
-    {
-        wManager = WBT;
-
-
-    }
+   
     public override void MyLogicUpdate()
     {
-        if (wManager.health < wManager.enragedHP)
+        if (bTManager.myHealth < (bTManager as WraithBehaviourTree).enragedHP)
         {
             myCurrentState = State.SUCCESS;
         }

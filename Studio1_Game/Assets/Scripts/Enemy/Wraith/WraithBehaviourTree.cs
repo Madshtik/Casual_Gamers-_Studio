@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WraithBehaviourTree : MonoBehaviour
+public class WraithBehaviourTree : BaseBT
 {
     PrimarySelector RootNode;
     public float range;
     public GameObject playerGO;
     public int patrolRange;
-    public float moveSpeed;
-    public float health=100;
     public float enragedHP=20;
-    public bool isEnraged;
     public GameObject fireShot;
     public GameObject[] patrolPoints;
 
@@ -53,7 +50,7 @@ public class WraithBehaviourTree : MonoBehaviour
         RootNode.MyChildren[3].MyChildren[1].MyChildren.Add(new SeekBehaviour());
         RootNode.MyChildren[3].MyChildren[1].MyChildren.Add(new WraithAttack());
         //tree
-        RootNode.WraithInitializeState(this);
+        RootNode.InitializeState(this);
        
     }
 

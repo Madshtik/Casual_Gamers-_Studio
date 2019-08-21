@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WraithEnragedAttack : WraithNode
+public class WraithEnragedAttack : Node
 {
     
-    public override void WraithInitializeState(WraithBehaviourTree WBT)
-    {
-        wManager = WBT;
-
-
-    }
+ 
     public override void MyLogicUpdate()
     {
-        wManager.PlasmaShot();
+        (bTManager as WraithBehaviourTree).PlasmaShot();
     }
 }

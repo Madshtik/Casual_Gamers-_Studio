@@ -2,21 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckEnraged : GhoulNode
+public class CheckEnraged : Node
 {
-    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
-    {
-        gManager = GBT;
-    }
+ 
 
     public override void MyLogicUpdate()
     {
-        if (gManager.isEnraged && gManager.enragedAttack)
+        if (bTManager.isEnraged && (bTManager as GhoulBehaviourTree).enragedAttack)
         {
-            Debug.Log("Check Enraged");
             myCurrentState = State.SUCCESS;
         }
-
-        myCurrentState = State.FAILED;
+        else
+        {
+            myCurrentState = State.FAILED;
+        }
     }
 }

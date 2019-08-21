@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckHP : GhoulNode
+public class CheckHP : Node
 {
-    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
-    {
-        gManager = GBT;
-    }
+
 
     public override void MyLogicUpdate()
     {
-        Debug.Log("checking");
-        if (gManager.myCurrentHP <= 50f && gManager.myCurrentHP >= 15f)
+        //Debug.Log("checking");
+        if (bTManager.myHealth <= 85f)
         {
             myCurrentState = State.SUCCESS;
             Debug.Log("HP Success");

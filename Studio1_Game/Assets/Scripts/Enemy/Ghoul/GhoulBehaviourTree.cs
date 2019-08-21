@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhoulBehaviourTree : MonoBehaviour
+public class GhoulBehaviourTree : BaseBT
 {
     Node RootNode;
-    public Transform TargetPlayer;
+
     public Rigidbody myRB;
     public Animator GhoulAnimator;
 
-    public float myMaxHP;
-    public float myCurrentHP;
-    public float mySpeed;
     public float checkDistance;
-    public float fleeTimerMax;
-    public float swordDamage;
-    public float myDamage;
     public float maxForce;
     public float rotationSlerp;
+    public float deathTimer;
 
-    public bool isEnraged;
     public bool enragedAttack;
 
     // Start is called before the first frame update
@@ -58,31 +52,38 @@ public class GhoulBehaviourTree : MonoBehaviour
         RootNode.MyChildren[2].MyChildren[1].MyChildren[1].MyChildren.Add(new PursuitBehaviour());
         RootNode.MyChildren[2].MyChildren[1].MyChildren[1].MyChildren.Add(new Attack());
 
-        RootNode.GhoulInitializeState(this);
+        RootNode.InitializeState(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (TargetPlayer == null)
+        if (targetPlayer == null)
         {
-            TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+            targetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        checkDistance = Vector3.Distance(transform.position, TargetPlayer.position);
+        checkDistance = Vector3.Distance(transform.position, targetPlayer.position);
+
+        if (myHealth <= 0f)
+        {
+            GhoulAnimator.SetTrigger("Dead");
+
+            deathTimer -= Time.deltaTime;
+
+            if (deathTimer <= 0f)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
         RootNode.MyLogicUpdate();
     }
 
     private void OnTriggerEnter(Collider MyTrigger)
     {
-        if (MyTrigger.gameObject.tag.Equals("Sword")) //detects the player's sword trigger and reduces the health of the ghoul
+        if (MyTrigger.gameObject.tag.Equals("Sword") && DamageSingleton.instance.swordSwing) //detects the player's sword trigger and reduces the health of the ghoul
         {
-            GhoulAnimator.SetBool("isHit", true);
-            myCurrentHP -= swordDamage;
-
-            if (myCurrentHP <= 0f)
-            {
-                Destroy(gameObject);
-            }
+            myHealth -= swordDamage;
         }
     }
 }

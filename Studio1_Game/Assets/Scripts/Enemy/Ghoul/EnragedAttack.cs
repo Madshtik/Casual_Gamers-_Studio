@@ -2,21 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnragedAttack : GhoulNode
+public class EnragedAttack : Node
 {
-    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
-    {
-        gManager = GBT;
-    }
-
     public override void MyLogicUpdate()
     {
-        Debug.Log("time to die");
-        if (gManager.isEnraged && gManager.enragedAttack && gManager.checkDistance <= 2f)
+        if ((bTManager as GhoulBehaviourTree).checkDistance <= 3f && !(bTManager as GhoulBehaviourTree).GhoulAnimator.GetCurrentAnimatorStateInfo(0).IsName("Crawl"))
         {
+            Debug.Log("time to die");
+            (bTManager as GhoulBehaviourTree).GhoulAnimator.SetTrigger("EAttack");
             myCurrentState = State.SUCCESS;
         }
-
-        myCurrentState = State.FAILED;
+        else
+        {
+            myCurrentState = State.FAILED;
+        }      
     }
 }

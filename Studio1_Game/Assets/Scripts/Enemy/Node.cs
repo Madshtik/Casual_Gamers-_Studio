@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Node 
+public abstract class Node
 {
-    public GhoulBehaviourTree gManager;
-    public WraithBehaviourTree wManager;
+    public BaseBT bTManager;
+
 
     public List<Node> MyChildren = new List<Node>();
 
@@ -17,7 +17,16 @@ public abstract class Node
     }
     public State myCurrentState;
 
-    public abstract void GhoulInitializeState(GhoulBehaviourTree GBT);
-    public abstract void WraithInitializeState(WraithBehaviourTree WBT);
+    public virtual void InitializeState(BaseBT BTM)
+    {
+       
+        bTManager = BTM;
+        for (int i = 0; i < MyChildren.Count; i++)
+        {
+             MyChildren[i].InitializeState(bTManager);          
+        }
+
+    }
+
     public abstract void MyLogicUpdate();
 }

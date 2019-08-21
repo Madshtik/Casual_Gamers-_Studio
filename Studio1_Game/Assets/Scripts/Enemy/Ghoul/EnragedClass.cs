@@ -2,26 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnragedClass : GhoulNode
+public class EnragedClass : Node
 {
-    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
-    {
-        gManager = GBT;
-    }
+  
 
     public override void MyLogicUpdate()
     {
-        if (!gManager.isEnraged && !gManager.enragedAttack)
+        if (!(bTManager as GhoulBehaviourTree).isEnraged && !(bTManager as GhoulBehaviourTree).enragedAttack)
         {
             Debug.Log("RAGEEEEE");
-            gManager.isEnraged = true;
-            gManager.enragedAttack = true;
+            bTManager.isEnraged = true;
+            (bTManager as GhoulBehaviourTree).enragedAttack = true;
             myCurrentState = State.SUCCESS;
         }
         else
         {
             myCurrentState = State.FAILED;
-            Debug.Log("failed");
+            //Debug.Log("failed");
         }
     }
 }

@@ -2,25 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckHPEnraged : GhoulNode
+public class CheckHPEnraged : Node
 {
-    public override void GhoulInitializeState(GhoulBehaviourTree GBT)
-    {
-        gManager = GBT;
-    }
+   
 
     public override void MyLogicUpdate()
     {
-        Debug.Log("checkingE");
-        if (gManager.myCurrentHP <= 15f)
+        //Debug.Log("checkingE");
+        if (bTManager.myHealth <= 45f)
         {
-            Debug.Log("HP SuccessE");
+            //Debug.Log("HP SuccessE");
             myCurrentState = State.SUCCESS;
         }
         else
         {
             myCurrentState = State.FAILED;
-            Debug.Log("HP FailE");
+            //Debug.Log("HP FailE");
         }
     }
 }

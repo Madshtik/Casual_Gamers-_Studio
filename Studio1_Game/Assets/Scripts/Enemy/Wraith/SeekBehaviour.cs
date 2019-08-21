@@ -2,25 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeekBehaviour : WraithNode
+public class SeekBehaviour : Node
 {
     RaycastHit hit;
-    public override void WraithInitializeState(WraithBehaviourTree WBT)
-    {
-        wManager = WBT;
-
-
-    }
+ 
     public override void MyLogicUpdate()
     {
 
-        Vector3 lookVector = wManager.playerGO.transform.position - wManager.transform.position;
+        Vector3 lookVector = (bTManager as WraithBehaviourTree).playerGO.transform.position - (bTManager as WraithBehaviourTree).transform.position;
         lookVector.y = 0;
         Quaternion rot = Quaternion.LookRotation(lookVector);
-        wManager.transform.rotation = Quaternion.Slerp(wManager.transform.rotation, rot, .02f);
+        (bTManager as WraithBehaviourTree).transform.rotation = Quaternion.Slerp((bTManager as WraithBehaviourTree).transform.rotation, rot, .02f);
         
 
-        if (Physics.Raycast(wManager.transform.position, wManager.transform.forward, out hit, 10))
+        if (Physics.Raycast((bTManager as WraithBehaviourTree).transform.position, (bTManager as WraithBehaviourTree).transform.forward, out hit, 10))
         {
             if (hit.transform.gameObject.tag == "Player")
             {

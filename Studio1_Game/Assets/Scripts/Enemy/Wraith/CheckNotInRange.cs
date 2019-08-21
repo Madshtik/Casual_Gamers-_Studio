@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckNotInRange : WraithNode
+public class CheckNotInRange : Node
 {
-    public override void WraithInitializeState(WraithBehaviourTree WBT)
-    {
-        wManager = WBT;
-
-    
-    }
+   
     public override void MyLogicUpdate()
     {
-      
-        if (Vector3.Distance(wManager.playerGO.transform.position,wManager.transform.position)>wManager.range)
+       
+        if (Vector3.Distance((bTManager as WraithBehaviourTree).playerGO.transform.position, (bTManager as WraithBehaviourTree).transform.position)> (bTManager as WraithBehaviourTree).range)
         {
             myCurrentState = State.SUCCESS;
         }
