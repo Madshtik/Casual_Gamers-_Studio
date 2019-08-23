@@ -12,13 +12,6 @@ public class WraithCheckHP : WraithNode
     }
     public override void MyLogicUpdate()
     {
-        if (wManager.health < wManager.enragedHP)
-        {
-            myCurrentState = State.SUCCESS;
-        }
-        else {
-            myCurrentState = State.FAILED;
-
-        }
+       
     }
 }

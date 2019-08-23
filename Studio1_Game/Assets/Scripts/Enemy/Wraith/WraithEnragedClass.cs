@@ -13,6 +13,6 @@ public class WraithEnragedClass : WraithNode
     }
     public override void MyLogicUpdate()
     {
-        wManager.isEnraged = true;
+       
     }
 }
