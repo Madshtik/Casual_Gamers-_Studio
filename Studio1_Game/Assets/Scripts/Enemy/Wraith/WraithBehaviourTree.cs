@@ -26,29 +26,19 @@ public class WraithBehaviourTree : BaseBT
         RootNode = new PrimarySelector();
         
         RootNode.MyChildren.Add(new Sequencer());
-        RootNode.MyChildren.Add(new Sequencer()); 
-        RootNode.MyChildren.Add(new FailClass());
-        RootNode.MyChildren.Add(new PrimarySelector());
+        RootNode.MyChildren.Add(new Sequencer());     
+        RootNode.MyChildren.Add(new Sequencer());
 
         RootNode.MyChildren[0].MyChildren.Add(new CheckNotInRange());
         RootNode.MyChildren[0].MyChildren.Add(new PatrolBehavior());
 
-       
+        RootNode.MyChildren[1].MyChildren.Add(new WraithCheckEnraged());
+        RootNode.MyChildren[1].MyChildren.Add(new SeekBehaviour());
+        RootNode.MyChildren[1].MyChildren.Add(new WraithEnragedAttack());
 
-        RootNode.MyChildren[2].MyChildren.Add(new Sequencer());
+        RootNode.MyChildren[1].MyChildren.Add(new SeekBehaviour());
+        RootNode.MyChildren[1].MyChildren.Add(new WraithAttack());
 
-        RootNode.MyChildren[2].MyChildren[0].MyChildren.Add(new WraithCheckHP());
-        RootNode.MyChildren[2].MyChildren[0].MyChildren.Add(new WraithEnragedClass());
-
-        RootNode.MyChildren[3].MyChildren.Add(new Sequencer());
-        RootNode.MyChildren[3].MyChildren.Add(new Sequencer());
-
-        RootNode.MyChildren[3].MyChildren[0].MyChildren.Add(new WraithCheckEnraged());
-        RootNode.MyChildren[3].MyChildren[0].MyChildren.Add(new SeekBehaviour());
-        RootNode.MyChildren[3].MyChildren[0].MyChildren.Add(new WraithEnragedAttack());
-
-        RootNode.MyChildren[3].MyChildren[1].MyChildren.Add(new SeekBehaviour());
-        RootNode.MyChildren[3].MyChildren[1].MyChildren.Add(new WraithAttack());
         //tree
         RootNode.InitializeState(this);
        

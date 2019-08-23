@@ -4519,6 +4519,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wraith Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 1566088822285546941, guid: 7cb87635eda0c69488dcf2ca1f98a910,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2585212027842381742, guid: 7cb87635eda0c69488dcf2ca1f98a910,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5524,7 +5529,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.0000002, z: 1.0000002}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 37.5, y: 0, z: 0}
 --- !u!1 &1240182732
 GameObject:
@@ -7289,7 +7294,7 @@ PrefabInstance:
     - target: {fileID: 7720304478893745761, guid: d23c7e18d2b534749bc62c2df15f6932,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -106.37
+      value: -16.9
       objectReference: {fileID: 0}
     - target: {fileID: 7720304478893745761, guid: d23c7e18d2b534749bc62c2df15f6932,
         type: 3}
@@ -7299,7 +7304,7 @@ PrefabInstance:
     - target: {fileID: 7720304478893745761, guid: d23c7e18d2b534749bc62c2df15f6932,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -95.27
+      value: -5.8
       objectReference: {fileID: 0}
     - target: {fileID: 7720304478893745761, guid: d23c7e18d2b534749bc62c2df15f6932,
         type: 3}
@@ -7324,7 +7329,7 @@ PrefabInstance:
     - target: {fileID: 7720304478893745761, guid: d23c7e18d2b534749bc62c2df15f6932,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7720304478893745761, guid: d23c7e18d2b534749bc62c2df15f6932,
         type: 3}
@@ -7339,6 +7344,10 @@ PrefabInstance:
     - target: {fileID: 7720304478893745761, guid: d23c7e18d2b534749bc62c2df15f6932,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518885780, guid: d23c7e18d2b534749bc62c2df15f6932, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6245521081558262318, guid: d23c7e18d2b534749bc62c2df15f6932,
@@ -7934,7 +7943,7 @@ Transform:
   - {fileID: 509286849}
   - {fileID: 1635403582}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1 &2010393720
 GameObject:
