@@ -9,6 +9,8 @@ TagManager:
   - Sword
   - Enemy
   - Claw
+  - FireBall
+  - PlasmaBall
   layers:
   - Default
   - TransparentFX
