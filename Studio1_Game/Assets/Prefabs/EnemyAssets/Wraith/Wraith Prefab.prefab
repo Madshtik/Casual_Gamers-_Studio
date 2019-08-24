@@ -594,6 +594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2585212027842381742}
   - component: {fileID: 5578419959576947412}
+  - component: {fileID: 4931810618062572535}
   m_Layer: 0
   m_Name: Wraith Prefab
   m_TagString: Enemy
@@ -638,6 +639,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4931810618062572535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566088822285546941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afb1b8ec3fbd7142a1f7cc558023726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPlayer: {fileID: 0}
+  myHealth: 0
+  mySpeed: 0
+  isEnraged: 0
+  swordDamage: 0
+  range: 15
+  playerGO: {fileID: 0}
+  patrolRange: 10
+  enragedHP: 5
+  fireShot: {fileID: 4873705707663536591, guid: cf5436ad185a90b42865a451195e7807,
+    type: 3}
+  plasmaShot: {fileID: 2094283483991736379, guid: b50c6436b6e06154886d39d0168f7ba0,
+    type: 3}
+  patrolPoints: []
+  myAnim: {fileID: 0}
+  attTime: 0
+  attIntervalTime: 3
+  canAttack: 0
+  patrolIndex: 0
 --- !u!1 &1629671230506364649
 GameObject:
   m_ObjectHideFlags: 0

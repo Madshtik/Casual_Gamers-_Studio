@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public float myHealth;
     public float clawDamage;
     public float damageMod;
+    public float fireBallDamage;
+    public float plasmaBallDamage;
 
     bool isJumping = false;
 
@@ -191,6 +193,17 @@ public class PlayerController : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+
+        if (col.gameObject.tag=="FireBall")
+        {
+            myHealth -= fireBallDamage;
+            //other set inactive
+        }
+        if (col.gameObject.tag == "PlasmaBall")
+        {
+            myHealth -= plasmaBallDamage;
+            //other set inactive
         }
     }
 

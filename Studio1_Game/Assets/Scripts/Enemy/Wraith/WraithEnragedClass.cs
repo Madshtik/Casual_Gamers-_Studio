@@ -8,6 +8,6 @@ public class WraithEnragedClass : Node
   
     public override void MyLogicUpdate()
     {
-        bTManager.isEnraged = true;
+      
     }
 }
