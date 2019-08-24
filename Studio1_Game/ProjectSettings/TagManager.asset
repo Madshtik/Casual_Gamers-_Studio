@@ -9,6 +9,7 @@ TagManager:
   - Sword
   - Enemy
   - Claw
+  - Trap
   layers:
   - Default
   - TransparentFX

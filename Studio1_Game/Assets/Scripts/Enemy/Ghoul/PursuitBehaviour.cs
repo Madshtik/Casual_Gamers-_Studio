@@ -14,7 +14,8 @@ public class PursuitBehaviour : Node
 
         Vector3 positionDiff = bTManager.targetPlayer.position - (bTManager as GhoulBehaviourTree).transform.position;
         Quaternion rotation = Quaternion.LookRotation(positionDiff);
-        (bTManager as GhoulBehaviourTree).transform.rotation = Quaternion.Slerp((bTManager as GhoulBehaviourTree).transform.rotation, rotation, (bTManager as GhoulBehaviourTree).rotationSlerp * Time.deltaTime); //rotation towards the target player
+        (bTManager as GhoulBehaviourTree).transform.rotation = Quaternion.Slerp((bTManager as GhoulBehaviourTree).transform.rotation, rotation, 
+            (bTManager as GhoulBehaviourTree).rotationSlerp * Time.deltaTime); //rotation towards the target player
 
         if ((bTManager as GhoulBehaviourTree).checkDistance <= slowingRadius)
         {
@@ -34,7 +35,7 @@ public class PursuitBehaviour : Node
         }
         else
         {
-             (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", true);
+            (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", true);
             Vector3 vectVelocity = Vector3.Normalize(bTManager.targetPlayer.position -  (bTManager as GhoulBehaviourTree).transform.position) *  (bTManager as GhoulBehaviourTree).mySpeed;
 
             vectVelocity = new Vector3(vectVelocity.x, 0, vectVelocity.z);

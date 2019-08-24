@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PrimarySelector : Node
 {
-  
-
- 
-
     public override void MyLogicUpdate()
     {
        

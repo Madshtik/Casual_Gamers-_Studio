@@ -166,6 +166,11 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
         }
+
+        if (Player.gameObject.tag == "Trap")
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider col)
