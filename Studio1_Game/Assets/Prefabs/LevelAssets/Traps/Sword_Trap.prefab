@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2325275004707228447}
   m_Layer: 0
   m_Name: Sword_Trap
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,8 +90,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6075134, y: 10.59139, z: 61.56292}
-  m_Center: {x: -0.00919342, y: 0.2751708, z: -30.78146}
+  m_Size: {x: 2.6075134, y: 5.4965477, z: 30.803867}
+  m_Center: {x: -0.00919342, y: 0.07137704, z: -15.40193}
 --- !u!95 &2325275004707228447
 Animator:
   serializedVersion: 3

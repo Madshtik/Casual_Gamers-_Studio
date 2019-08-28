@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 
     public Transform ShootPoint;
 
-    GhoulBehaviourTree ghoul;
-
     public float mySpeed;
     public float myJumpHeight;
     public float myTeleportDistance;
@@ -23,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     bool isJumping = false;
 
-    public Animator MyAnimator;
+    public Animator myAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -47,10 +45,10 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S)
-            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+            && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.forward * mySpeed * Time.deltaTime);
-            MyAnimator.SetBool("isWalkingF", true);
+            myAnimator.SetBool("isWalkingF", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
@@ -61,14 +59,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W))
         {
-            MyAnimator.SetBool("isWalkingF", false);
+            myAnimator.SetBool("isWalkingF", false);
         }
 
         if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)
-            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+            && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.back * (mySpeed/1.5f) * Time.deltaTime);
-            MyAnimator.SetBool("isWalkingB", true);
+            myAnimator.SetBool("isWalkingB", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
@@ -79,14 +77,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.S))
         {
-            MyAnimator.SetBool("isWalkingB", false);
+            myAnimator.SetBool("isWalkingB", false);
         }
 
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S)
-            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+            && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.left * (mySpeed / 1.5f) * Time.deltaTime);
-            MyAnimator.SetBool("isStrafingL", true);
+            myAnimator.SetBool("isStrafingL", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
@@ -97,14 +95,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.A))
         {
-            MyAnimator.SetBool("isStrafingL", false);
+            myAnimator.SetBool("isStrafingL", false);
         }
 
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S)
-            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+            && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             transform.Translate(Vector3.right * (mySpeed / 1.5f) * Time.deltaTime);
-            MyAnimator.SetBool("isStrafingR", true);
+            myAnimator.SetBool("isStrafingR", true);
 
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
@@ -115,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.D))
         {
-            MyAnimator.SetBool("isStrafingR", false);
+            myAnimator.SetBool("isStrafingR", false);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
@@ -136,21 +134,21 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkF") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkB")
-            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeR") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeL"))
+        if (Input.GetMouseButtonDown(0) && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkF") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkB")
+            && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeR") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeL"))
         {
-            MyAnimator.SetTrigger("Attack");
+            myAnimator.SetTrigger("Attack");
         }
 
-        if (Input.GetMouseButtonDown(1) && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2") 
-            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkF") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkB")
-            && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeR") && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeL"))
+        if (Input.GetMouseButtonDown(1) && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2") 
+            && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkF") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkB")
+            && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeR") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeL"))
         {
-            MyAnimator.SetTrigger("FireBolt");
+            myAnimator.SetTrigger("FireBolt");
             Shoot();
         }
 
-        if (MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") || MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+        if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") || myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
         {
             DamageSingleton.instance.swordSwing = true;
             Debug.Log("attacking");

@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PursuitBehaviour : Node
-{ 
- 
-
+{
     public override void MyLogicUpdate()
     {
-        //Debug.Log("HEYYYY");
-
         float slowingRadius = 5f;
 
         Vector3 positionDiff = bTManager.targetPlayer.position - (bTManager as GhoulBehaviourTree).transform.position;
@@ -20,8 +16,10 @@ public class PursuitBehaviour : Node
         if ((bTManager as GhoulBehaviourTree).checkDistance <= slowingRadius)
         {
             (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", true);
+
             Vector3 vectVelocity = Vector3.Normalize(bTManager.targetPlayer.position - (bTManager as GhoulBehaviourTree).transform.position) * (bTManager as GhoulBehaviourTree).mySpeed * ((bTManager as GhoulBehaviourTree).checkDistance / slowingRadius);
             vectVelocity = new Vector3(vectVelocity.x, 0, vectVelocity.z);
+
             Vector3 mySteering = vectVelocity - (bTManager as GhoulBehaviourTree).myRB.velocity;
 
             Vector3.ClampMagnitude(mySteering, (bTManager as GhoulBehaviourTree).maxForce);

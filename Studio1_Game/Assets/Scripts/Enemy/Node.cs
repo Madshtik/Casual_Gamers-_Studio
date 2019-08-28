@@ -6,7 +6,6 @@ public abstract class Node
 {
     public BaseBT bTManager;
 
-
     public List<Node> MyChildren = new List<Node>();
 
     public enum State
@@ -19,13 +18,11 @@ public abstract class Node
 
     public virtual void InitializeState(BaseBT BTM)
     {
-       
         bTManager = BTM;
         for (int i = 0; i < MyChildren.Count; i++)
         {
-             MyChildren[i].InitializeState(bTManager);          
+             MyChildren[i].InitializeState(bTManager);
         }
-
     }
 
     public abstract void MyLogicUpdate();
