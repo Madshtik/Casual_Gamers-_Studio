@@ -34,13 +34,13 @@ public class PursuitBehaviour : Node
         }
         else
         {
-             (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", true);
-            Vector3 vectVelocity = Vector3.Normalize(bTManager.targetPlayer.position -  (bTManager as GhoulBehaviourTree).transform.position) *  (bTManager as GhoulBehaviourTree).mySpeed;
+            (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", true);
+            Vector3 vectVelocity = Vector3.Normalize(bTManager.targetPlayer.position - (bTManager as GhoulBehaviourTree).transform.position) * (bTManager as GhoulBehaviourTree).mySpeed;
 
             vectVelocity = new Vector3(vectVelocity.x, 0, vectVelocity.z);
-            Vector3 mySteering = vectVelocity -  (bTManager as GhoulBehaviourTree).myRB.velocity;
+            Vector3 mySteering = vectVelocity - (bTManager as GhoulBehaviourTree).myRB.velocity;
 
-            Vector3.ClampMagnitude(mySteering,  (bTManager as GhoulBehaviourTree).maxForce);
+            Vector3.ClampMagnitude(mySteering, (bTManager as GhoulBehaviourTree).maxForce);
 
             (bTManager as GhoulBehaviourTree).myRB.AddForce(mySteering);
 
