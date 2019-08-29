@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FailClass : Node //this class will update itself as fail no matter what state the children return
 {
-   
-
     public override void MyLogicUpdate()
     {
        

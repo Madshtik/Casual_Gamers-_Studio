@@ -9,6 +9,10 @@ TagManager:
   - Sword
   - Enemy
   - Claw
+  - Trap
+  - FireBall
+  - PlasmaBall
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

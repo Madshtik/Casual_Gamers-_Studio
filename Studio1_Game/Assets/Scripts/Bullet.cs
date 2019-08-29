@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -24,9 +24,17 @@ public class Bullet : MonoBehaviour
 
             if (myBulletTimer <= 0f)
             {
-                gameObject.SetActive(false);
                 myBulletTimer = 5f;
+                gameObject.SetActive(false);
             }
+        }
+    }
+
+    public void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Enemy")
+        {
+            gameObject.SetActive(false);
         }
     }
 }

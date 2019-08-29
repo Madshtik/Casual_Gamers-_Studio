@@ -8,25 +8,28 @@ public class WraithBehaviourTree : BaseBT
     public float range;
     public GameObject playerGO;
     public int patrolRange;
-    public float enragedHP=20;
+    public float enragedHP = 20;
     public GameObject fireShot;
+    public GameObject plasmaShot;
     public GameObject[] patrolPoints;
+    public Transform ballSpawnP;
 
+    public Animator myAnim;
     public float attTime;
     public float attIntervalTime;
     public bool canAttack;
-    public int patrolIndex=0;
+    public int patrolIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
-        
+
         patrolPoints = new GameObject[4];
-  
+
         //tree
         RootNode = new PrimarySelector();
-        
+
         RootNode.MyChildren.Add(new Sequencer());
-        RootNode.MyChildren.Add(new Sequencer());     
+        RootNode.MyChildren.Add(new Sequencer());
         RootNode.MyChildren.Add(new Sequencer());
 
         RootNode.MyChildren[0].MyChildren.Add(new CheckNotInRange());
@@ -36,51 +39,80 @@ public class WraithBehaviourTree : BaseBT
         RootNode.MyChildren[1].MyChildren.Add(new SeekBehaviour());
         RootNode.MyChildren[1].MyChildren.Add(new WraithEnragedAttack());
 
-        RootNode.MyChildren[1].MyChildren.Add(new SeekBehaviour());
-        RootNode.MyChildren[1].MyChildren.Add(new WraithAttack());
+        RootNode.MyChildren[2].MyChildren.Add(new SeekBehaviour());
+        RootNode.MyChildren[2].MyChildren.Add(new WraithAttack());
 
         //tree
         RootNode.InitializeState(this);
-       
+        myAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        RootNode.MyLogicUpdate();
 
-        if (!canAttack&&attTime<attIntervalTime)
+        RootNode.MyLogicUpdate();
+        if (!canAttack && attTime < attIntervalTime)
         {
             attTime += Time.deltaTime;
-            if (attTime>=attIntervalTime)
+            if (attTime >= attIntervalTime)
             {
                 canAttack = true;
                 attTime = 0;
             }
         }
+
+        if (myHealth <= 0)
+        {
+            myAnim.SetBool("isDead", true);
+            
+        }
+       
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Sword" && DamageSingleton.instance.swordSwing) //detects the player's sword trigger and reduces the health of the ghoul
+        {
+            myHealth -= swordDamage;
+        }
 
-    public void FireShot() {
-
+        if (other.gameObject.tag == "PlayerBullet" && DamageSingleton.instance.swordSwing)
+        {
+            myHealth -= swordDamage;
+        }
+    }
+    public void FireShot()
+    { 
         if (canAttack)
         {
-            Instantiate(fireShot, transform.position, transform.rotation);
+            myAnim.SetTrigger("Attack");
+
             canAttack = false;
         }
-        
-
-
     }
     public void PlasmaShot()
     {
-
         if (canAttack)
         {
-            Instantiate(fireShot, transform.position, transform.rotation);
+            myAnim.SetTrigger("Attack");
+
             canAttack = false;
         }
+    }
 
-
-
+    public void InstantiatePlasma()
+    {
+        Instantiate(plasmaShot, transform.position, transform.rotation);
+    }
+    public void InstantiateFire()
+    {
+        if (!isEnraged)
+        {
+            Instantiate(fireShot, ballSpawnP.position, transform.rotation);
+        }
+        else
+        {
+            Instantiate(plasmaShot, ballSpawnP.position, transform.rotation);
+        }
     }
 }

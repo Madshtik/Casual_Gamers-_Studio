@@ -10,15 +10,4 @@ public class BaseBT : MonoBehaviour
     public float mySpeed;
     public bool isEnraged;
     public float swordDamage;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

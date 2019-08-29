@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Sequencer : Node
 {
-  
-
- 
     public override void MyLogicUpdate()
     {
         for (int i = 0; i < MyChildren.Count; i++) //the sequencer will update its state by asking it's children to update theirs

@@ -58,7 +58,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.38790038
+        functionName: InstantiateFire
+        data: 
+        objectReferenceParameter: {fileID: 1566088822285546941, guid: 7cb87635eda0c69488dcf2ca1f98a910,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
