@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody Player;
 
-    public Transform ShootPoint;
+    public GameObject teleportParticle;
+    public Transform shootPoint;
+    public Transform player;
 
     public float mySpeed;
     public float myJumpHeight;
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
                 transform.Translate(Vector3.forward * myTeleportDistance * mySpeed * Time.deltaTime);
+                Instantiate(teleportParticle, new Vector3(player.position.x, player.position.y + 2, player.position.z), Quaternion.Euler(-90, 0, 0));
                 myTeleportTimer = 0;
             }
         }
@@ -71,6 +74,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
                 transform.Translate(Vector3.back * myTeleportDistance * mySpeed * Time.deltaTime);
+                Instantiate(teleportParticle, new Vector3(player.position.x, player.position.y + 2, player.position.z), Quaternion.Euler(-90, 0, 0));
                 myTeleportTimer = 0;
             }
         }
@@ -89,6 +93,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
                 transform.Translate(Vector3.left * myTeleportDistance * mySpeed * Time.deltaTime);
+                Instantiate(teleportParticle, new Vector3(player.position.x, player.position.y + 2, player.position.z), Quaternion.Euler(-90, 0, 0));
                 myTeleportTimer = 0;
             }
         }
@@ -107,6 +112,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftControl) && myTeleportTimer >= myTeleportTimerMax)
             {
                 transform.Translate(Vector3.right * myTeleportDistance * mySpeed * Time.deltaTime);
+                Instantiate(teleportParticle, new Vector3(player.position.x, player.position.y + 2, player.position.z), Quaternion.Euler(-90, 0, 0));
                 myTeleportTimer = 0;
             }
         }
@@ -114,6 +120,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D))
         {
             myAnimator.SetBool("isStrafingR", false);
+        }
+
+        if (myTeleportTimer == myTeleportTimerMax)
+        {
+            teleportParticle.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
@@ -144,6 +155,7 @@ public class PlayerController : MonoBehaviour
             && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkF") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkB")
             && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeR") && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("StrafeL"))
         {
+            DamageSingleton.instance.swordSwing = true;
             myAnimator.SetTrigger("FireBolt");
             Shoot();
         }
@@ -186,14 +198,9 @@ public class PlayerController : MonoBehaviour
             {
                 myHealth -= clawDamage;
             }
-
-            if (myHealth <= 0)
-            {
-                Destroy(gameObject);
-            }
         }
 
-        if (col.gameObject.tag=="FireBall")
+        if (col.gameObject.tag == "FireBall")
         {
             myHealth -= fireBallDamage;
             //other set inactive
@@ -202,6 +209,11 @@ public class PlayerController : MonoBehaviour
         {
             myHealth -= plasmaBallDamage;
             //other set inactive
+        }
+
+        if (myHealth <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -212,7 +224,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        bullet.transform.position = ShootPoint.position;
+        bullet.transform.position = shootPoint.position;
         bullet.transform.rotation = transform.rotation;
         bullet.SetActive(true);
     }

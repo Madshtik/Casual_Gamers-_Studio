@@ -9689,7 +9689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4ab119036cce24b94906b0d47050c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myBulletSpeed: 4
+  myBulletSpeed: 10
   myBulletTimer: 5
 --- !u!135 &-4075349475776626275
 SphereCollider:

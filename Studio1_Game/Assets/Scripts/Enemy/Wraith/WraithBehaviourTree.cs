@@ -75,58 +75,44 @@ public class WraithBehaviourTree : BaseBT
         {
             myHealth -= swordDamage;
         }
+
+        if (other.gameObject.tag == "PlayerBullet" && DamageSingleton.instance.swordSwing)
+        {
+            myHealth -= swordDamage;
+        }
     }
     public void FireShot()
-    {
-       
+    { 
         if (canAttack)
         {
             myAnim.SetTrigger("Attack");
 
             canAttack = false;
         }
-
-
-
     }
     public void PlasmaShot()
     {
-
         if (canAttack)
         {
             myAnim.SetTrigger("Attack");
 
             canAttack = false;
         }
-
-
-
     }
 
     public void InstantiatePlasma()
     {
-
-
         Instantiate(plasmaShot, transform.position, transform.rotation);
-
-
     }
     public void InstantiateFire()
     {
-      
         if (!isEnraged)
         {
             Instantiate(fireShot, ballSpawnP.position, transform.rotation);
-
         }
         else
         {
             Instantiate(plasmaShot, ballSpawnP.position, transform.rotation);
-
         }
-
-
-
     }
-
 }
