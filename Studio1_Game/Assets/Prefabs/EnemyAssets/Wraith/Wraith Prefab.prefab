@@ -687,7 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayer: {fileID: 0}
   myHealth: 180
-  mySpeed: 5
+  mySpeed: 3
   isEnraged: 0
   swordDamage: 30
   range: 15
@@ -700,9 +700,11 @@ MonoBehaviour:
     type: 3}
   patrolPoints: []
   ballSpawnP: {fileID: 147817619}
+  rb: {fileID: 0}
   myAnim: {fileID: 0}
   attTime: 0
   attIntervalTime: 3
+  seekForce: 0.1
   canAttack: 0
   patrolIndex: 0
 --- !u!54 &1005119930

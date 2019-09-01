@@ -13,10 +13,11 @@ public class WraithBehaviourTree : BaseBT
     public GameObject plasmaShot;
     public GameObject[] patrolPoints;
     public Transform ballSpawnP;
-
+    public Rigidbody rb;
     public Animator myAnim;
     public float attTime;
     public float attIntervalTime;
+    public float seekForce;
     public bool canAttack;
     public int patrolIndex = 0;
     // Start is called before the first frame update
@@ -45,6 +46,7 @@ public class WraithBehaviourTree : BaseBT
         //tree
         RootNode.InitializeState(this);
         myAnim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
