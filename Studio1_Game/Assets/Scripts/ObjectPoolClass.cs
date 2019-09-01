@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class ObjectPoolClass : MonoBehaviour
 {
-    public GameObject ghoul;
-    //public GameObject Wraith;
     public GameObject playerBullets;
-    //public GameObject WraithBullets;
-    //public Transform Player;
-    //public GameObject spawnPoint;
 
     public List<GameObject> pooledBullets;
     public List<GameObject> pooledGhouls;
@@ -32,23 +27,11 @@ public class ObjectPoolClass : MonoBehaviour
             pBulletObj.SetActive(false);
             pooledBullets.Add(pBulletObj);
         }
-
-        for (int i = 0; i < poolMax; i++)
-        {
-            GameObject ghoulObj = Instantiate(ghoul);
-            ghoulObj.SetActive(false);
-            pooledGhouls.Add(ghoulObj);
-        }
     }
 
     void Update()
     {
-        //playerDist = Vector3.Distance(transform.position, Player.position);
-
-        //if (playerDist <= 15f)
-        //{
-        //    SpawnGhoul();
-        //}
+        
     }
 
     public GameObject PlayerBulletToSpawn()
@@ -71,22 +54,4 @@ public class ObjectPoolClass : MonoBehaviour
 
         return null;
     }
-
-    //public void SpawnGhoul()
-    //{
-    //    for (int i = 0; i < pooledGhouls.Count; i++)
-    //    {
-    //        if (!pooledGhouls[i].activeInHierarchy)
-    //        {
-    //            GameObject ghoul = pooledGhouls[i];
-    //            if (ghoul == null)
-    //            {
-    //                return;
-    //            }
-    //            ghoul.transform.position = spawnPoint.transform.position;
-    //            ghoul.transform.rotation = transform.rotation;
-    //            ghoul.SetActive(true);
-    //        }
-    //    }
-    //}
 }

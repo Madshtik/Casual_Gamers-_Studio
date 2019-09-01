@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class WanderBehaviour : Node
 {
-    float circleRadius = 5;
-    float wanderAngle = Random.Range(0f, Mathf.PI * 2);
-    Vector3 SeekDirection;
+    Vector3 circleCentre;
+    Vector3 circleRadius;
+
     public override void MyLogicUpdate()
     {
-        
+        circleCentre = new Vector3((bTManager as GhoulBehaviourTree).transform.position.x, 
+            (bTManager as GhoulBehaviourTree).transform.position.y, (bTManager as GhoulBehaviourTree).transform.position.z + 5);
 
+        circleRadius = new Vector3(circleCentre.x + 3, 0, circleCentre.z + 3);
 
         myCurrentState = State.FAILED;
     }

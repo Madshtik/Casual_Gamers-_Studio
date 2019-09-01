@@ -22,7 +22,7 @@ public class AssetDownScript : MonoBehaviour
     {
         myInitialPos = transform.position;
         playerNear = false;
-        desiredPos = new Vector3(myInitialPos.x, myInitialPos.y - 20f, myInitialPos.z);
+        desiredPos = new Vector3(myInitialPos.x, myInitialPos.y - 30f, myInitialPos.z);
 
     }
     // Update is called once per frame
