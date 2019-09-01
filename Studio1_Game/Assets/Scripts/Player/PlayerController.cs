@@ -129,8 +129,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
         {
+            myAnimator.SetBool("isJumping", true);
             Player.velocity = new Vector3(0f, myJumpHeight, 0f);
             isJumping = true;
+        }
+        else
+        {
+            myAnimator.SetBool("isJumping", false);
         }
 
         if (myTeleportTimer <= myTeleportTimerMax)

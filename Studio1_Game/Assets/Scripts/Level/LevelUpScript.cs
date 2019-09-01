@@ -41,7 +41,7 @@ public class LevelUpScript : MonoBehaviour
             }
             
             myMat.color = fader;
-            Vector3 desiredPos = new Vector3(myInitialPos.x, myInitialPos.y + 10f, myInitialPos.z);
+            Vector3 desiredPos = new Vector3(myInitialPos.x, myInitialPos.y + 20f, myInitialPos.z);
             Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothingSpeed);
             transform.position = smoothedPos;
         }
