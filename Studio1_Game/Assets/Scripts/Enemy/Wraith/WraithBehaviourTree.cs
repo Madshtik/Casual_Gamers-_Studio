@@ -20,6 +20,7 @@ public class WraithBehaviourTree : BaseBT
     public float seekForce;
     public bool canAttack;
     public int patrolIndex = 0;
+    public bool isDead = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,12 +65,13 @@ public class WraithBehaviourTree : BaseBT
             }
         }
 
-        if (myHealth <= 0)
+        if (myHealth <= 0 && !isDead)
         {
+            isDead = true;
             myAnim.SetBool("isDead", true);
-            
+
         }
-       
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -84,7 +86,7 @@ public class WraithBehaviourTree : BaseBT
         }
     }
     public void FireShot()
-    { 
+    {
         if (canAttack)
         {
             myAnim.SetTrigger("Attack");

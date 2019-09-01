@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float myTeleportTimer;
     public float myTeleportTimerMax;
     public float myHealth;
+    public float myMaxHealth;
     public float clawDamage;
     public float damageMod;
     public float fireBallDamage;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         Player = GetComponent<Rigidbody>();
         myAnimator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -182,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
         if (Player.gameObject.tag == "Trap")
         {
-            Destroy(gameObject);
+           
         }
     }
 
@@ -214,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
         if (myHealth <= 0)
         {
-            Destroy(gameObject);
+           
         }
     }
 
@@ -229,4 +231,6 @@ public class PlayerController : MonoBehaviour
         bullet.transform.rotation = transform.rotation;
         bullet.SetActive(true);
     }
+
+   
 }

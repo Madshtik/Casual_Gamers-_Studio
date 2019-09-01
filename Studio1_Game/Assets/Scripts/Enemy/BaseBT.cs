@@ -9,5 +9,5 @@ public class BaseBT : MonoBehaviour
     public float myHealth;
     public float mySpeed;
     public bool isEnraged;
-    public float swordDamage;
+    public static float swordDamage;
 }
