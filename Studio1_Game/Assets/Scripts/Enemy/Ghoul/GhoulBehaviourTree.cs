@@ -12,7 +12,6 @@ public class GhoulBehaviourTree : BaseBT
     public float checkDistance;
     public float maxForce;
     public float rotationSlerp;
-    public float deathTimer;
 
     public bool enragedAttack;
 
@@ -63,13 +62,13 @@ public class GhoulBehaviourTree : BaseBT
             targetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
         }
         checkDistance = Vector3.Distance(transform.position, targetPlayer.position);
-
+        
         if (myHealth <= 0f)
         {
             GhoulAnimator.SetTrigger("Dead");
 
             deathTimer -= Time.deltaTime;
-
+            myRB.useGravity = true;
             if (deathTimer <= 0f)
             {
                 gameObject.SetActive(false);
@@ -79,11 +78,16 @@ public class GhoulBehaviourTree : BaseBT
         RootNode.MyLogicUpdate();
     }
 
-    private void OnTriggerEnter(Collider MyTrigger)
+    private void OnTriggerEnter(Collider myTrigger)
     {
-        if (MyTrigger.gameObject.tag.Equals("Sword") && DamageSingleton.instance.swordSwing) //detects the player's sword trigger and reduces the health of the ghoul
+        if (myTrigger.gameObject.tag.Equals("Sword") && DamageSingleton.instance.swordSwing) //detects the player's sword trigger and reduces the health of the ghoul
         {
             myHealth -= swordDamage;
+        }
+
+        if (myTrigger.gameObject.tag.Equals("PlayerBullet"))
+        {
+            myHealth -= playerBulletDamage;
         }
     }
 }

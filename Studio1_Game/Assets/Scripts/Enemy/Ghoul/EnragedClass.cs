@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnragedClass : Node
 {
-  
-
     public override void MyLogicUpdate()
     {
         if (!(bTManager as GhoulBehaviourTree).isEnraged && !(bTManager as GhoulBehaviourTree).enragedAttack)

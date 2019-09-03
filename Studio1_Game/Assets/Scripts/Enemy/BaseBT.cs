@@ -10,4 +10,6 @@ public class BaseBT : MonoBehaviour
     public float mySpeed;
     public bool isEnraged;
     public float swordDamage;
+    public float playerBulletDamage;
+    public float deathTimer;
 }

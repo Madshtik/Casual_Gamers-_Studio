@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody Player;
 
+    public GameObject pauseMenu;
     public GameObject teleportParticle;
     public Transform shootPoint;
     public Transform player;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float damageMod;
     public float fireBallDamage;
     public float plasmaBallDamage;
+    float deathZoneDamage = 500f;
 
     bool isJumping = false;
 
@@ -175,6 +178,12 @@ public class PlayerController : MonoBehaviour
             DamageSingleton.instance.swordSwing = false;
             Debug.Log("not attacking");
         }
+
+        if (Input.GetKey(KeyCode.Escape) && !pauseMenu.activeInHierarchy)
+        {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+        }
     }
 
     private void OnCollisionEnter(Collision Player)
@@ -186,7 +195,7 @@ public class PlayerController : MonoBehaviour
 
         if (Player.gameObject.tag == "Trap")
         {
-            Destroy(gameObject);
+            SceneManager.LoadScene("DeathScene");
         }
     }
 
@@ -216,9 +225,14 @@ public class PlayerController : MonoBehaviour
             //other set inactive
         }
 
+        if (col.gameObject.tag == "Deathzone")
+        {
+            myHealth = myHealth - deathZoneDamage;
+        }
+
         if (myHealth <= 0)
         {
-            Destroy(gameObject);
+            SceneManager.LoadScene("DeathScene");
         }
     }
 

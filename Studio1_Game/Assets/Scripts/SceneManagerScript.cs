@@ -9,18 +9,18 @@ public class SceneManagerScript : MonoBehaviour
 {
     public VideoPlayer vidPlayer;
     float vidTimer = 122f;
-
+    public GameObject pauseMenu;
     void Update()
     {
         Scene currentScene = SceneManager.GetActiveScene();
 
         string sceneName = currentScene.name;
 
-        if (sceneName == "Cutscene_Scene")
+        if (sceneName == "CutScene_Scene")
         {
             vidTimer -= Time.deltaTime;
         }
-
+        Debug.Log(sceneName);
         if (vidTimer <= 0f)
         {
             LoadFirstLevel();
@@ -29,7 +29,7 @@ public class SceneManagerScript : MonoBehaviour
     }
     public void LoadCutscene()
     {
-        SceneManager.LoadScene("Cutscene_Scene");
+        SceneManager.LoadScene("CutScene_Scene");
     }
 
     public void LoadFirstLevel()
@@ -44,5 +44,25 @@ public class SceneManagerScript : MonoBehaviour
             SceneManager.LoadScene("Second Level");
         }
         
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OnApplicationQuit()
+    {
+        Application.Quit();
+        Debug.Log("Quit");
+    }
+
+    public void Resume()
+    {
+        if (pauseMenu.activeInHierarchy)
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+        }
     }
 }
