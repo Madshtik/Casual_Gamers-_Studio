@@ -11,12 +11,13 @@ public class CheckRange : Node
         
         if ((bTManager as GhoulBehaviourTree).checkDistance <= 20f && bTManager.myHealth >= 1f)
         {
-            //Debug.Log("Hbaahaug");
+            (bTManager as GhoulBehaviourTree).myRB.useGravity = true;
             myCurrentState = State.SUCCESS;
         }
         else
         {
             (bTManager as GhoulBehaviourTree).GhoulAnimator.SetBool("isCrawling", false);
+            (bTManager as GhoulBehaviourTree).myRB.useGravity = false;
             myCurrentState = State.FAILED;
         }
     }

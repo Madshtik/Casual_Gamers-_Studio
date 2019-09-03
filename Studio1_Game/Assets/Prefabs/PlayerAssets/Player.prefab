@@ -1170,7 +1170,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &5667462463088792786
 MonoBehaviour:
@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 3335848808863467461}
+  pauseMenu: {fileID: 0}
   teleportParticle: {fileID: 5065311133954183733, guid: e436cf69e8bf8b243a1b393c790561fa,
     type: 3}
   shootPoint: {fileID: 3386761667684074507}
@@ -1194,7 +1195,7 @@ MonoBehaviour:
   myTeleportDistance: 100
   myTeleportTimer: 3
   myTeleportTimerMax: 3
-  myHealth: 100
+  myHealth: 200
   clawDamage: 10
   damageMod: 5
   fireBallDamage: 15
