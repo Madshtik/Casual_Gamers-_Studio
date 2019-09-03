@@ -370,7 +370,7 @@ PrefabInstance:
     - target: {fileID: 2585212027842381742, guid: 7cb87635eda0c69488dcf2ca1f98a910,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.801804
+      value: -38.6
       objectReference: {fileID: 0}
     - target: {fileID: 2585212027842381742, guid: 7cb87635eda0c69488dcf2ca1f98a910,
         type: 3}
@@ -717,6 +717,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2320930171813113725, guid: 1eef4709b7eb99e43a0d4535abe33367,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eef4709b7eb99e43a0d4535abe33367, type: 3}
 --- !u!1 &870580936
@@ -748,7 +753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f42a86dea3e0d448b1a38016abc1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghoul: {fileID: 8581274907953388243, guid: aeab5203fa2762048a8427065ca25a9d, type: 3}
   playerBullets: {fileID: 7355594114821694509, guid: 4dd059793606af348bbcb6319624006e,
     type: 3}
   pooledBullets: []

@@ -69,7 +69,15 @@ public class WraithBehaviourTree : BaseBT
         {
             isDead = true;
             myAnim.SetBool("isDead", true);
+<<<<<<< HEAD
 
+=======
+            deathTimer -= Time.deltaTime;
+            if (deathTimer <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+>>>>>>> 38deede44ef352291e0acbb3ff8a1b360c3e4a4c
         }
 
     }
@@ -80,9 +88,9 @@ public class WraithBehaviourTree : BaseBT
             myHealth -= swordDamage;
         }
 
-        if (other.gameObject.tag == "PlayerBullet" && DamageSingleton.instance.swordSwing)
+        if (other.gameObject.tag == "PlayerBullet")
         {
-            myHealth -= swordDamage;
+            myHealth -= playerBulletDamage;
         }
     }
     public void FireShot()

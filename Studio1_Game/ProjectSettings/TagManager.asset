@@ -13,6 +13,7 @@ TagManager:
   - FireBall
   - PlasmaBall
   - PlayerBullet
+  - Deathzone
   layers:
   - Default
   - TransparentFX
