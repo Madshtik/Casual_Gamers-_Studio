@@ -19,13 +19,13 @@ public class SceneManagerScript : MonoBehaviour
         if (sceneName == "CutScene_Scene")
         {
             vidTimer -= Time.deltaTime;
+            if (vidTimer <= 0f || Input.GetKeyDown(KeyCode.Escape))
+            {
+                LoadFirstLevel();
+            }
         }
         Debug.Log(sceneName);
-        if (vidTimer <= 0f)
-        {
-            LoadFirstLevel();
-        }
-        print(vidTimer);
+        Debug.Log(vidTimer);
     }
     public void LoadCutscene()
     {
